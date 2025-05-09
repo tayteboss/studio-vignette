@@ -1,34 +1,30 @@
 import styled from "styled-components";
 import { NextSeo } from "next-seo";
 import {
-  FieldNoteType,
-  HomePageType,
+  InformationPageType,
   SiteSettingsType,
   TransitionsType,
 } from "../shared/types/types";
 import { motion } from "framer-motion";
 import client from "../client";
 import {
-  fieldNotesQueryString,
-  homePageQueryString,
+  informationPageQueryString,
   siteSettingsQueryString,
 } from "../lib/sanityQueries";
 
 const PageWrapper = styled(motion.div)``;
 
 type Props = {
-  data: HomePageType;
+  data: InformationPageType;
   siteSettings: SiteSettingsType;
-  fieldNotes: FieldNoteType[];
   pageTransitionVariants: TransitionsType;
 };
 
 const Page = (props: Props) => {
-  const { data, siteSettings, fieldNotes, pageTransitionVariants } = props;
+  const { data, siteSettings, pageTransitionVariants } = props;
 
   console.log("data", data);
   console.log("siteSettings", siteSettings);
-  console.log("fieldNotes", fieldNotes);
 
   return (
     <PageWrapper
@@ -47,14 +43,12 @@ const Page = (props: Props) => {
 
 export async function getStaticProps() {
   const siteSettings = await client.fetch(siteSettingsQueryString);
-  const data = await client.fetch(homePageQueryString);
-  const fieldNotes = await client.fetch(fieldNotesQueryString);
+  const data = await client.fetch(informationPageQueryString);
 
   return {
     props: {
       data,
       siteSettings,
-      fieldNotes,
     },
   };
 }

@@ -1,34 +1,31 @@
 import styled from "styled-components";
-import { NextSeo } from "next-seo";
+import client from "../../client";
+import { motion } from "framer-motion";
 import {
   FieldNoteType,
-  HomePageType,
-  SiteSettingsType,
+  FieldNotesPageType,
   TransitionsType,
-} from "../shared/types/types";
-import { motion } from "framer-motion";
-import client from "../client";
+} from "../../shared/types/types";
+import { NextSeo } from "next-seo";
 import {
+  fieldNotesPageQueryString,
   fieldNotesQueryString,
-  homePageQueryString,
-  siteSettingsQueryString,
-} from "../lib/sanityQueries";
+} from "../../lib/sanityQueries";
+import PageBuilder from "../../components/common/PageBuilder";
 
-const PageWrapper = styled(motion.div)``;
+const PageWrapper = styled(motion.div)`
+  min-height: 150vh;
+  background: var(--colour-white);
+`;
 
 type Props = {
-  data: HomePageType;
-  siteSettings: SiteSettingsType;
+  data: FieldNotesPageType;
   fieldNotes: FieldNoteType[];
   pageTransitionVariants: TransitionsType;
 };
 
 const Page = (props: Props) => {
-  const { data, siteSettings, fieldNotes, pageTransitionVariants } = props;
-
-  console.log("data", data);
-  console.log("siteSettings", siteSettings);
-  console.log("fieldNotes", fieldNotes);
+  const { data, fieldNotes, pageTransitionVariants } = props;
 
   return (
     <PageWrapper
@@ -46,14 +43,12 @@ const Page = (props: Props) => {
 };
 
 export async function getStaticProps() {
-  const siteSettings = await client.fetch(siteSettingsQueryString);
-  const data = await client.fetch(homePageQueryString);
+  const data = await client.fetch(fieldNotesPageQueryString);
   const fieldNotes = await client.fetch(fieldNotesQueryString);
 
   return {
     props: {
       data,
-      siteSettings,
       fieldNotes,
     },
   };

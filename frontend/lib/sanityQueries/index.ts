@@ -15,44 +15,133 @@ export const mediaString = `
 			playbackId,
 		},
 	},
-	mobileImage {
-		asset-> {
-			url,
-			metadata {
-				lqip
-			}
-		},
-		alt
+`;
+
+export const pageBuilderBlockString = `
+	component,
+	headingBlockPB {
+		subheading,
+		heading
 	},
-	mobileVideo {
-		asset-> {
-			playbackId,
+	contentBlockPB {
+		subheading,
+		content,
+		media {
+			${mediaString}
 		},
+		figureNumber,
+		title,
+		caption,
+		url
 	},
+	imageGalleryBlockPB {
+		galleryItems[] {
+			media {
+				${mediaString}
+			},
+			figureNumber,
+			title,
+			caption,
+			url
+		}
+	},
+	mediaBlockPB {
+		mediaItems[] {
+			media {
+				${mediaString}
+			},
+			figureNumber,
+			caption
+		},
+		mediaRatio
+	},
+	productGalleryBlockPB {
+		products[] {
+			image {
+				asset-> {
+					url
+				}
+			},
+			title,
+			description,
+			url
+		}
+	},
+	considerationsBlockPB {
+		title,
+		considerations[] {
+			title,
+			description,
+			image {
+				asset-> {
+					url
+				}
+			},
+			imageRatio
+		}
+	}
 `;
 
 export const siteSettingsQueryString = `
 	*[_type == 'siteSettings'][0] {
-		...,
+		referenceTitle,
+		address,
+		addressUrl,
+		email,
+		phone,
+		instagramUrl,
+		facebookUrl,
+		credits[] {
+			title,
+			link
+		}
 	}
 `;
 
 export const homePageQueryString = `
 	*[_type == 'homePage'][0] {
-		...,
+		seoTitle,
+		seoDescription
 	}
 `;
 
-export const workPageQueryString = `
-	*[_type == "workPage"] {
-		...,
+export const informationPageQueryString = `
+	*[_type == 'informationPage'][0] {
 		seoTitle,
 		seoDescription,
+		profileText,
+		careersText,
+		media {
+			media {
+				${mediaString}
+			}
+		},
+		mediaIdentifiers[] {
+			position,
+			name,
+			role
+		}
 	}
 `;
 
-export const projectsQueryString = `
-	*[_type == 'project'] | order(orderRank) [0...100] {
-		...,
+export const fieldNotesPageQueryString = `
+	*[_type == "fieldNotesPage"][0] {
+		seoTitle,
+		seoDescription
+	}
+`;
+
+export const fieldNotesQueryString = `
+	*[_type == 'fieldNote'] | order(date desc) [0...100] {
+		title,
+		slug,
+		date,
+		heroMedia {
+			${mediaString}
+		},
+		heroMediaCaption,
+		pageBuilder[] {
+			${pageBuilderBlockString}
+		}
 	}
 `;

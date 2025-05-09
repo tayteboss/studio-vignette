@@ -42,7 +42,7 @@ export type SiteSettingsType = {
   facebookUrl: string;
   credits: {
     title: string;
-    url: string;
+    link: string;
   }[];
 };
 
@@ -63,8 +63,8 @@ export type InformationPageType = {
   careersText: string;
   media: MediaType;
   mediaIdentifiers: {
-    title: string;
-    url: string;
+    position: string;
+    name: string;
     role: string;
   }[];
 };
