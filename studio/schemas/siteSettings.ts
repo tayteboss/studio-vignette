@@ -1,5 +1,3 @@
-import {mediaBlock} from '../objects'
-
 export default {
   title: 'Site Settings',
   name: 'siteSettings',

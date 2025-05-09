@@ -6,7 +6,10 @@ export const GlobalStyles = createGlobalStyle`
 	:root {
 		--colour-white: ${theme.colours.white};
 		--colour-black: ${theme.colours.black};
-		--font-default: ${theme.fonts.default};
+		--colour-primary: ${theme.colours.primary};
+		--colour-cream: ${theme.colours.cream};
+		--font-hal: ${theme.fonts.hal};
+		--font-mono: ${theme.fonts.mono};
 		--transition-speed-default: ${theme.transitionSpeed.default};
 		--transition-speed-fast: ${theme.transitionSpeed.fast};
 		--transition-speed-extra-fast: ${theme.transitionSpeed.extraFast};
@@ -32,12 +35,12 @@ export const GlobalStyles = createGlobalStyle`
 	-webkit-text-size-adjust: 100%;
 
 	::selection {
-		background-color: black;
-		color: white;
+		background-color: var(--colour-primary);
+		color: var(--colour-cream);
 	}
 
 	html {
-		background: var(--colour-white);
+		background: var(--colour-cream);
 		font-size: 16px;
 
 		&.no-scroll {
@@ -59,7 +62,7 @@ export const GlobalStyles = createGlobalStyle`
 	button,
 	label,
 	body {
-		font-family: var(--font-default);
+		font-family: var(--font-hal);
 		color: var(--colour-black);
 		line-height: normal;
 	}
@@ -84,75 +87,100 @@ export const GlobalStyles = createGlobalStyle`
 
 	h1,
 	.type-h1 {
+		font-family: var(--font-hal);
+		font-weight: 400;
 		font-size: ${pxToRem(48)};
-		line-height: ${pxToRem(48)};
+		line-height: ${pxToRem(43)};
+		letter-spacing: -1.44px;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
 			font-size: ${pxToRem(38)};
 			line-height: ${pxToRem(38)};
-		}
-
-		@media ${theme.mediaBreakpoints.mobile} {
-			font-size: ${pxToRem(28)};
-			line-height: ${pxToRem(28)};
 		}
 	}
 
 	h2,
 	.type-h2 {
-		font-size: ${pxToRem(48)};
-		line-height: ${pxToRem(48)};
+		font-family: var(--font-hal);
+		font-weight: 400;
+		font-size: ${pxToRem(40)};
+		line-height: ${pxToRem(44)};
+		letter-spacing: -0.4px;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
-			font-size: ${pxToRem(38)};
-			line-height: ${pxToRem(38)};
-		}
-
-		@media ${theme.mediaBreakpoints.mobile} {
-			font-size: ${pxToRem(28)};
-			line-height: ${pxToRem(28)};
+			font-size: ${pxToRem(32)};
+			line-height: ${pxToRem(32)};
 		}
 	}
 
 	h3,
 	.type-h3 {
-		font-size: ${pxToRem(48)};
-		line-height: ${pxToRem(28)};
+		font-family: var(--font-hal);
+		font-weight: 400;
+		font-size: ${pxToRem(24)};
+		line-height: ${pxToRem(21)};
+		letter-spacing: -0.72px;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
-			font-size: ${pxToRem(38)};
-			line-height: ${pxToRem(38)};
-		}
-
-		@media ${theme.mediaBreakpoints.mobile} {
-			font-size: ${pxToRem(28)};
-			line-height: ${pxToRem(28)};
+			font-size: ${pxToRem(20)};
+			line-height: ${pxToRem(20)};
 		}
 	}
 
 	h4,
-	.type-h4 {
-		font-size: ${pxToRem(48)};
-		line-height: ${pxToRem(28)};
-
-		@media ${theme.mediaBreakpoints.tabletPortrait} {
-			font-size: ${pxToRem(38)};
-			line-height: ${pxToRem(38)};
-		}
-
-		@media ${theme.mediaBreakpoints.mobile} {
-			font-size: ${pxToRem(28)};
-			line-height: ${pxToRem(28)};
-		}
-	}
-
+	.type-h4,
 	p,
 	.type-p,
 	a,
 	button,
 	div {
-		font-size: ${pxToRem(16)};
-		line-height: ${pxToRem(16)};
+		font-family: var(--font-hal);
+		font-weight: 400;
+		font-size: ${pxToRem(20)};
+		line-height: ${pxToRem(22)};
+		letter-spacing: -0.4px;
+
+		@media ${theme.mediaBreakpoints.tabletPortrait} {
+			font-size: ${pxToRem(16)};
+			line-height: ${pxToRem(18)};
+		}
+	}
+
+	.type-subtitle {
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-size: ${pxToRem(10)};
+		line-height: normal;
+		letter-spacing: -0.3px;
+	}
+
+	.type-nav {
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-size: ${pxToRem(10)};
+		line-height: normal;
+	}
+
+	.type-caption {
+		font-family: var(--font-hal);
+		font-weight: 400;
+		font-size: ${pxToRem(8)};
+		line-height: ${pxToRem(9)};
+	}
+
+	.type-small {
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-size: ${pxToRem(12)};
+		line-height: ${pxToRem(11)};
+	}
+
+	.type-footer {
+		font-family: var(--font-hal);
+		font-weight: 400;
+		font-size: ${pxToRem(12)};
+		line-height: normal;
+		letter-spacing: -0.24px;
 	}
 
 	mux-player {

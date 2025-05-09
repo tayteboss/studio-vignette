@@ -18,6 +18,9 @@ const nextConfig = {
     loader: 'custom',
     loaderFile: './lib/sanityImageLoader.ts', // Adjust path if you placed it elsewhere (e.g., './lib/sanityImageLoader.js')
   },
+  compiler: {
+    styledComponents: true, // Enable styled-components
+  },
 };
 
 // Use module.exports (CommonJS) to export the wrapped config
