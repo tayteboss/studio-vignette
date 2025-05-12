@@ -47,6 +47,7 @@ export type SiteSettingsType = {
   email: string;
   phone: string;
   instagramUrl: string;
+  instagramUsername: string;
   facebookUrl: string;
   credits: {
     title: string;
@@ -57,6 +58,7 @@ export type SiteSettingsType = {
 export type HomePageType = {
   seoTitle: string;
   seoDescription: string;
+  title: string;
 };
 
 export type FieldNotesPageType = {
@@ -145,6 +147,12 @@ export type ConsiderationsBlock = {
     considerations: Array<{
       title: string;
       description: string;
+      image: {
+        asset: {
+          url: string;
+        };
+      };
+      imageRatio: MediaRatioType;
     }>;
   };
 };

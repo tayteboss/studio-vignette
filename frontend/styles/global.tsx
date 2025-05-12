@@ -39,8 +39,17 @@ export const GlobalStyles = createGlobalStyle`
 		color: var(--colour-cream);
 	}
 
+	.page-home {
+		.footer {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+		}
+	}
+
 	html {
 		background: var(--colour-cream);
+		color: var(--colour-primary);
 		font-size: 16px;
 
 		&.no-scroll {
@@ -63,7 +72,7 @@ export const GlobalStyles = createGlobalStyle`
 	label,
 	body {
 		font-family: var(--font-hal);
-		color: var(--colour-black);
+		color: var(--colour-primary);
 		line-height: normal;
 	}
 
@@ -77,8 +86,8 @@ export const GlobalStyles = createGlobalStyle`
 	}
 
 	a {
-		text-decoration: underline;
-		color: var(--colour-black);
+		text-decoration: none;
+		color: var(--colour-primary);
 	}
 
 	button {
@@ -90,12 +99,12 @@ export const GlobalStyles = createGlobalStyle`
 		font-family: var(--font-hal);
 		font-weight: 400;
 		font-size: ${pxToRem(48)};
-		line-height: ${pxToRem(43)};
+		line-height: ${pxToRem(45)};
 		letter-spacing: -1.44px;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
-			font-size: ${pxToRem(38)};
-			line-height: ${pxToRem(38)};
+			font-size: ${pxToRem(28)};
+			line-height: ${pxToRem(26)};
 		}
 	}
 
@@ -108,8 +117,8 @@ export const GlobalStyles = createGlobalStyle`
 		letter-spacing: -0.4px;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
-			font-size: ${pxToRem(32)};
-			line-height: ${pxToRem(32)};
+			font-size: ${pxToRem(20)};
+			line-height: ${pxToRem(22)};
 		}
 	}
 
@@ -117,13 +126,13 @@ export const GlobalStyles = createGlobalStyle`
 	.type-h3 {
 		font-family: var(--font-hal);
 		font-weight: 400;
-		font-size: ${pxToRem(24)};
-		line-height: ${pxToRem(21)};
+		font-size: ${pxToRem(20)};
+		line-height: ${pxToRem(23)};
 		letter-spacing: -0.72px;
 
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
-			font-size: ${pxToRem(20)};
-			line-height: ${pxToRem(20)};
+			font-size: ${pxToRem(14)};
+			line-height: ${pxToRem(16)};
 		}
 	}
 
@@ -152,13 +161,6 @@ export const GlobalStyles = createGlobalStyle`
 		font-size: ${pxToRem(10)};
 		line-height: normal;
 		letter-spacing: -0.3px;
-	}
-
-	.type-nav {
-		font-family: var(--font-marfa);
-		font-weight: 400;
-		font-size: ${pxToRem(10)};
-		line-height: normal;
 	}
 
 	.type-caption {

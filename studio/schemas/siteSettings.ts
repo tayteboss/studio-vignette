@@ -36,6 +36,11 @@ export default {
       type: 'url',
     },
     {
+      title: 'Instagram Username',
+      name: 'instagramUsername',
+      type: 'string',
+    },
+    {
       title: 'Facebook URL',
       name: 'facebookUrl',
       type: 'url',

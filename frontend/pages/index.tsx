@@ -13,6 +13,10 @@ import {
   homePageQueryString,
   siteSettingsQueryString,
 } from "../lib/sanityQueries";
+import { useState } from "react";
+import HomeTitle from "../components/blocks/HomeTitle";
+import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
+import HomeFieldNotes from "../components/blocks/HomeFieldNotes";
 
 const PageWrapper = styled(motion.div)``;
 
@@ -26,9 +30,13 @@ type Props = {
 const Page = (props: Props) => {
   const { data, siteSettings, fieldNotes, pageTransitionVariants } = props;
 
+  const [heroTitle, setHeroTitle] = useState(data?.title);
+
   console.log("data", data);
   console.log("siteSettings", siteSettings);
   console.log("fieldNotes", fieldNotes);
+
+  const lenis = useLenis(({ scroll }) => {});
 
   return (
     <PageWrapper
@@ -41,6 +49,10 @@ const Page = (props: Props) => {
         title={data?.seoTitle || ""}
         description={data?.seoDescription || ""}
       />
+      <HomeTitle title={heroTitle} />
+      <ReactLenis root>
+        <HomeFieldNotes fieldNotes={fieldNotes} />
+      </ReactLenis>
     </PageWrapper>
   );
 };

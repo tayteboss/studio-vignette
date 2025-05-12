@@ -19,5 +19,10 @@ export default {
       name: 'seoDescription',
       type: 'string',
     },
+    {
+      title: 'Title',
+      name: 'title',
+      type: 'string',
+    },
   ],
 }

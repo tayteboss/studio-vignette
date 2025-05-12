@@ -25,14 +25,21 @@ export const pageBuilderBlockString = `
 	},
 	contentBlockPB {
 		subheading,
-		content,
-		media {
+		contentBlock[] {
+			content,
+			media {
+				${mediaString}
+			},
+			figureNumber,
+			title,
+			caption,
+			url
+		},
+		heroMedia {
 			${mediaString}
 		},
-		figureNumber,
-		title,
-		caption,
-		url
+		heroMediaRatio,
+		heroMediaFigureNumber
 	},
 	imageGalleryBlockPB {
 		galleryItems[] {
@@ -46,21 +53,17 @@ export const pageBuilderBlockString = `
 		}
 	},
 	mediaBlockPB {
-		mediaItems[] {
-			media {
-				${mediaString}
-			},
-			figureNumber,
-			caption
+		media {
+			${mediaString}
 		},
+		figureNumber,
+		caption,
 		mediaRatio
 	},
 	productGalleryBlockPB {
 		products[] {
-			image {
-				asset-> {
-					url
-				}
+			media {
+				${mediaString}
 			},
 			title,
 			description,
@@ -79,6 +82,11 @@ export const pageBuilderBlockString = `
 			},
 			imageRatio
 		}
+	},
+	testimonialBlockPB {
+		quote,
+		figureNumber,
+		authorAndDate
 	}
 `;
 
@@ -101,7 +109,8 @@ export const siteSettingsQueryString = `
 export const homePageQueryString = `
 	*[_type == 'homePage'][0] {
 		seoTitle,
-		seoDescription
+		seoDescription,
+		title
 	}
 `;
 
