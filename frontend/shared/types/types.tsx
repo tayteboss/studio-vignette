@@ -181,7 +181,9 @@ export type FieldNoteType = {
   categories?: {
     _ref: string;
   }[];
+  numeralIndex: string;
   date: string;
+  season: "Spring" | "Summer" | "Autumn" | "Winter";
   heroMedia: MediaType;
   heroMediaRatio?: MediaRatioType;
   heroMediaCaption: string;

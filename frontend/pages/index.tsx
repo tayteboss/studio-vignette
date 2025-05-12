@@ -10,10 +10,11 @@ import { motion } from "framer-motion";
 import client from "../client";
 import {
   fieldNotesQueryString,
+  fieldNotesQueryStringSimplified,
   homePageQueryString,
   siteSettingsQueryString,
 } from "../lib/sanityQueries";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HomeTitle from "../components/blocks/HomeTitle";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import HomeFieldNotes from "../components/blocks/HomeFieldNotes";
@@ -30,13 +31,19 @@ type Props = {
 const Page = (props: Props) => {
   const { data, siteSettings, fieldNotes, pageTransitionVariants } = props;
 
-  const [heroTitle, setHeroTitle] = useState(data?.title);
+  const [heroTitle, setHeroTitle] = useState<string | FieldNoteType>(
+    data?.title
+  );
 
   console.log("data", data);
   console.log("siteSettings", siteSettings);
   console.log("fieldNotes", fieldNotes);
 
-  const lenis = useLenis(({ scroll }) => {});
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useLenis();
 
   return (
     <PageWrapper
@@ -49,9 +56,14 @@ const Page = (props: Props) => {
         title={data?.seoTitle || ""}
         description={data?.seoDescription || ""}
       />
-      <HomeTitle title={heroTitle} />
+      <HomeTitle data={heroTitle} />
       <ReactLenis root>
-        <HomeFieldNotes fieldNotes={fieldNotes} />
+        <HomeFieldNotes
+          fieldNotes={fieldNotes}
+          homeTitle={data?.title}
+          setHeroTitle={setHeroTitle}
+          heroTitle={heroTitle}
+        />
       </ReactLenis>
     </PageWrapper>
   );
@@ -60,7 +72,22 @@ const Page = (props: Props) => {
 export async function getStaticProps() {
   const siteSettings = await client.fetch(siteSettingsQueryString);
   const data = await client.fetch(homePageQueryString);
-  const fieldNotes = await client.fetch(fieldNotesQueryString);
+  let fieldNotes = await client.fetch(fieldNotesQueryStringSimplified);
+
+  const fieldNotesWithNumerals = fieldNotes.map(
+    (note: FieldNoteType, index: number) => ({
+      ...note,
+      numeralIndex: Array(index + 1)
+        .fill("I")
+        .join("")
+        .replace(/IIIII/g, "V")
+        .replace(/VV/g, "X")
+        .replace(/XXXXX/g, "L")
+        .replace(/LL/g, "C"),
+    })
+  );
+
+  fieldNotes = fieldNotesWithNumerals;
 
   return {
     props: {

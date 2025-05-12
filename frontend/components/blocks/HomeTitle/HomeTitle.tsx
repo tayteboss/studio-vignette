@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { HomePageType } from "../../../shared/types/types";
+import { FieldNoteType, HomePageType } from "../../../shared/types/types";
 import LayoutWrapper from "../../layout/LayoutWrapper";
+import { AnimatePresence, motion } from "framer-motion";
 
 const HomeTitleWrapper = styled.section`
   position: fixed;
@@ -19,22 +20,79 @@ const Inner = styled.div`
   width: 100%;
 `;
 
-const Title = styled.h1`
+const Title = styled(motion.h1)`
   text-align: center;
 `;
 
+const FieldNoteTitle = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const wrapperVariants = {
+  hidden: {
+    opacity: 0,
+    transition: {
+      duration: 0.1,
+      ease: "easeInOut",
+    },
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+      ease: "easeInOut",
+    },
+  },
+};
+
 type Props = {
-  title: HomePageType["title"];
+  data: string | FieldNoteType;
 };
 
 const HomeTitle = (props: Props) => {
-  const { title } = props;
+  const { data } = props;
+
+  const isFieldNote = typeof data !== "string";
+
+  const formatYear = (date: string) => {
+    const year = new Date(date).getFullYear();
+    return year;
+  };
 
   return (
     <HomeTitleWrapper>
       <LayoutWrapper>
         <Inner>
-          <Title>{title || ""}</Title>
+          <AnimatePresence mode="wait">
+            {isFieldNote ? (
+              <FieldNoteTitle
+                variants={wrapperVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                key="field-note-title"
+              >
+                <Title>{data?.numeralIndex || ""}.</Title>
+                <Title>{data?.title || ""}</Title>
+                <Title>
+                  {data?.season || ""}, {formatYear(data?.date) || ""}
+                </Title>
+              </FieldNoteTitle>
+            ) : (
+              <Title
+                variants={wrapperVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                key="regular-title"
+              >
+                {data}
+              </Title>
+            )}
+          </AnimatePresence>
         </Inner>
       </LayoutWrapper>
     </HomeTitleWrapper>

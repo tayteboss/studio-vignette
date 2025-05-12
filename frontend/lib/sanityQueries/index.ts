@@ -145,12 +145,32 @@ export const fieldNotesQueryString = `
 		title,
 		slug,
 		date,
+		season,
 		heroMedia {
 			${mediaString}
 		},
+		heroMediaRatio,
 		heroMediaCaption,
 		pageBuilder[] {
 			${pageBuilderBlockString}
 		}
 	}
+`;
+
+export const fieldNotesQueryStringSimplified = `
+	*[_type == 'fieldNote'] | order(date desc) [0...100] {
+		title,
+		slug,
+		date,
+		season,
+		heroMedia {
+			${mediaString}
+		},
+		heroMediaRatio,
+		heroMediaCaption,
+	}
+`;
+
+export const fieldNotesCountQueryString = `
+	count(*[_type == 'fieldNote'])
 `;

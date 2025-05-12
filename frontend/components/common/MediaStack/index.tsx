@@ -24,12 +24,11 @@ const MediaStack = (props: Props) => {
     sizes = undefined,
     alt,
     lazyLoad = false,
-    useLoader = false,
   } = props ?? {};
 
   // sizes="(max-width: 768px) 38vw, (max-width: 1024px) 20vw, 15vw"
 
-  const useVideo = data?.media?.mediaType === "video";
+  const useVideo = data?.mediaType === "video";
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -46,7 +45,6 @@ const MediaStack = (props: Props) => {
           isPriority={isPriority}
           noAnimation={noAnimation}
           lazyLoad={lazyLoad}
-          useLoader={useLoader}
         />
       )}
       {!useVideo && (

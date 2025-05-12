@@ -24,7 +24,7 @@ export const theme = {
     default: "150ms",
     fast: "100ms",
     extraFast: "100ms",
-    slow: "500ms",
+    slow: "300ms",
     extraSlow: "800ms",
   },
 };

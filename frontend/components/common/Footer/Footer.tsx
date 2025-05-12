@@ -47,9 +47,12 @@ const Footer = (props: Props) => {
   return (
     <FooterWrapper className="footer">
       <Link href={addressUrl}>
-        <Address dangerouslySetInnerHTML={{ __html: formatHTML(address) }} />
+        <Address
+          className="type-small"
+          dangerouslySetInnerHTML={{ __html: formatHTML(address) }}
+        />
       </Link>
-      <Links>
+      <Links className="type-small">
         {email && (
           <Link href={`mailto:${email}`}>
             <TextSwitch resting="Email" hover={email} />

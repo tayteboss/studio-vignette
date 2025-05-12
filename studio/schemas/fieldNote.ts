@@ -54,6 +54,14 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      title: 'Season',
+      name: 'season',
+      type: 'string',
+      options: {
+        list: ['Spring', 'Summer', 'Autumn', 'Winter'],
+      },
+    },
+    {
       title: 'Hero Media',
       name: 'heroMedia',
       type: 'object',

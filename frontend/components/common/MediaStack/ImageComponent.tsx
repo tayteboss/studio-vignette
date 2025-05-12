@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const ImageComponentWrapper = styled.div`
   position: relative;
   overflow: hidden;
-  background: var(--colour-cream);
+  background: var(--colour-foreground);
 
   mux-player, // If you also use this wrapper for Mux Player
   img {
@@ -25,8 +25,6 @@ const MotionDivBase = styled(motion.div)`
 
 const InnerBlurWrapper = styled(MotionDivBase)`
   z-index: 2; // Placeholder on top
-  // Ensure the placeholder itself has the blur and scale if not animated initially
-  // This is now handled by the variant's 'visible' state directly
 `;
 
 const InnerMainImageWrapper = styled(MotionDivBase)`
@@ -93,9 +91,9 @@ const ImageComponent = (props: Props) => {
   // On desktop, the image should take up 15% of the viewport width
   // sizes="(max-width: 768px) 38vw, (max-width: 1024px) 20vw, 15vw"
 
-  const imageUrl = data?.media?.image?.asset?.url;
-  const blurDataURL = data?.media?.image?.asset?.metadata?.lqip;
-  const imageAltText = alt || data?.media?.image?.alt || "Visual media content";
+  const imageUrl = data?.image?.asset?.url;
+  const blurDataURL = data?.image?.asset?.metadata?.lqip;
+  const imageAltText = alt || data?.image?.alt || "Visual media content";
   const loadingStrategy = isPriority
     ? "eager"
     : lazyLoad === false
@@ -163,6 +161,7 @@ const ImageComponent = (props: Props) => {
             initial="visible" // Placeholder is immediately visible in its blurred state
             animate="visible" // Stays in this state
             exit="exit" // Animates out using the 'exit' variant
+            className="image-colour-base"
           >
             <Image
               src={blurDataURL}
@@ -185,6 +184,7 @@ const ImageComponent = (props: Props) => {
           animate={
             shouldAnimateElements && isMainImageLoaded ? "animate" : "initial"
           }
+          className="image-colour-base"
         >
           <Image
             src={imageUrl}

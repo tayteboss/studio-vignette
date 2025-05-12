@@ -174,15 +174,14 @@ export const GlobalStyles = createGlobalStyle`
 		font-family: var(--font-marfa);
 		font-weight: 400;
 		font-size: ${pxToRem(12)};
-		line-height: ${pxToRem(11)};
-	}
-
-	.type-footer {
-		font-family: var(--font-hal);
-		font-weight: 400;
-		font-size: ${pxToRem(12)};
 		line-height: normal;
-		letter-spacing: -0.24px;
+
+		* {
+			font-family: var(--font-marfa);
+			font-weight: 400;
+			font-size: ${pxToRem(12)};
+			line-height: normal;
+		}
 	}
 
 	mux-player {
@@ -191,6 +190,38 @@ export const GlobalStyles = createGlobalStyle`
 		--controls: none;
 		--media-object-fit: cover;
 		--media-object-position: center;
+	}
+
+	.trigger-colour {
+		.image-colour-base {
+			img, mux-player {
+				filter: grayscale(0%);
+			}
+		}
+	}
+
+	.image-colour-base {
+		img, mux-player {
+			filter: grayscale(100%);
+			mix-blend-mode: screen;
+
+			transition: all var(--transition-speed-slow) var(--transition-ease);
+
+			&:hover {
+				filter: grayscale(0%);
+			}
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: var(--colour-primary);
+			z-index: -1;
+		}
 	}
 
 	.view-element-fade-in
