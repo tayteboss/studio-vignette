@@ -3,6 +3,7 @@ import homePage from './homePage'
 import informationPage from './informationPage'
 import fieldNote from './fieldNote'
 import fieldNotesPage from './fieldNotesPage'
+import category from './category'
 import {
   headingBlockPB,
   contentBlockPB,
@@ -10,6 +11,7 @@ import {
   mediaBlockPB,
   productGalleryBlockPB,
   considerationsBlockPB,
+  testimonialBlockPB,
 } from '../objects'
 
 export const schemaTypes = [
@@ -18,10 +20,12 @@ export const schemaTypes = [
   siteSettings,
   fieldNotesPage,
   fieldNote,
+  category,
   headingBlockPB,
   contentBlockPB,
   imageGalleryBlockPB,
   mediaBlockPB,
   productGalleryBlockPB,
   considerationsBlockPB,
+  testimonialBlockPB,
 ]

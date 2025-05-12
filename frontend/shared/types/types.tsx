@@ -4,6 +4,14 @@ export type MediaType = {
   image: { asset: { url: string; metadata: { lqip: string } }; alt: string };
 };
 
+export type MediaRatioType =
+  | "100%"
+  | "150%"
+  | "125%"
+  | "80%"
+  | "66.66%"
+  | "56.25%";
+
 export type TransitionsType = {
   hidden: {
     opacity: number;
@@ -81,12 +89,17 @@ export type ContentBlock = {
   component: "contentBlockPB";
   contentBlockPB: {
     subheading?: string;
-    content: string;
-    media?: MediaType;
-    figureNumber?: string;
-    title?: string;
-    caption?: string;
-    url?: string;
+    contentBlock: Array<{
+      content?: string;
+      media?: MediaType;
+      figureNumber?: string;
+      title?: string;
+      caption?: string;
+      url?: string;
+    }>;
+    heroMedia?: MediaType;
+    heroMediaRatio?: MediaRatioType;
+    heroMediaFigureNumber?: string;
   };
 };
 
@@ -106,12 +119,10 @@ export type ImageGalleryBlock = {
 export type MediaBlock = {
   component: "mediaBlockPB";
   mediaBlockPB: {
-    mediaItems: Array<{
-      media: MediaType;
-      figureNumber?: string;
-      caption?: string;
-    }>;
-    mediaRatio: "100%" | "125%" | "66.66%";
+    media: MediaType;
+    mediaRatio: MediaRatioType;
+    figureNumber?: string;
+    caption?: string;
   };
 };
 
@@ -138,19 +149,33 @@ export type ConsiderationsBlock = {
   };
 };
 
+export type TestimonialBlock = {
+  component: "testimonialBlockPB";
+  testimonialBlockPB: {
+    quote: string;
+    figureNumber?: string;
+    authorAndDate: string;
+  };
+};
+
 export type PageBuilderBlock =
   | HeadingBlock
   | ContentBlock
   | ImageGalleryBlock
   | MediaBlock
   | ProductGalleryBlock
-  | ConsiderationsBlock;
+  | ConsiderationsBlock
+  | TestimonialBlock;
 
 export type FieldNoteType = {
   title: string;
   slug: SlugType;
+  categories?: {
+    _ref: string;
+  }[];
   date: string;
   heroMedia: MediaType;
+  heroMediaRatio?: MediaRatioType;
   heroMediaCaption: string;
   pageBuilder: PageBuilderBlock[];
 };

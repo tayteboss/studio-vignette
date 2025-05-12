@@ -1,5 +1,12 @@
-/* @font-face {
-	font-family: 'HaasGrot';
-	src: url('/fonts/HaasGrotDisp-55Roman.woff2') format('woff2'), url('/fonts/HaasGrotDisp-55Roman.woff') format('woff'), url('/fonts/HaasGrotDisp-55Roman.ttf') format('truetype'), url('/fonts/HaasGrotDisp-55Roman.otf') format('opentype');
+@font-face {
+	font-family: 'Hal Timezone';
+	src: url('/fonts/HalTimezone-Regular.woff2') format('woff2'), url('/fonts/HalTimezone-Regular.woff') format('woff'), url('/fonts/HalTimezone-Regular.otf') format('opentype');
 	font-display: swap;
-} */
+}
+
+@font-face {
+	font-family: 'ABC Marfa';
+	src: url('/fonts/ABCMarfaSemi-Mono-Regular.otf') format('opentype');
+	font-display: swap;
+}
+

@@ -6,8 +6,8 @@ export const theme = {
     white: "#FFF",
   },
   fonts: {
-    hal: "times, Hal Timezone",
-    mono: "mono, ABC Marfa",
+    hal: "Hal Timezone",
+    marfa: "ABC Marfa",
   },
   mediaBreakpoints: {
     desktop: "(min-width: 1680px)",

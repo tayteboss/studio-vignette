@@ -13,8 +13,11 @@ const selectMediaTypeObject = {
 
 const ratioList = [
   {title: '1:1 - Square', value: '100%'},
+  {title: '2:3 - Portrait', value: '150%'},
   {title: '4:5 - Portrait', value: '125%'},
+  {title: '5:4 - Landscape', value: '80%'},
   {title: '3:2 - Landscape', value: '66.66%'},
+  {title: '16:9 - Landscape', value: '56.25%'},
 ]
 
 const seoObject = {
@@ -105,37 +108,87 @@ const contentBlockPB = {
       type: 'string',
     },
     {
-      title: 'Content',
-      name: 'content',
-      type: 'text',
+      title: 'Content Block',
+      name: 'contentBlock',
+      type: 'array',
+      of: [
+        {
+          title: 'Content',
+          name: 'content',
+          type: 'object',
+          fields: [
+            {
+              title: 'Content',
+              name: 'content',
+              type: 'text',
+            },
+          ],
+        },
+        {
+          title: 'Media',
+          name: 'media',
+          type: 'object',
+          fields: [
+            {
+              title: 'Figure Number',
+              name: 'figureNumber',
+              type: 'string',
+            },
+            {
+              title: 'Caption',
+              name: 'caption',
+              type: 'text',
+              rows: 3,
+            },
+            {
+              title: 'Media',
+              name: 'media',
+              type: 'object',
+              fields: mediaBlock,
+            },
+            {
+              title: 'Media Ratio',
+              name: 'mediaRatio',
+              type: 'string',
+              options: {
+                list: ratioList,
+                layout: 'radio',
+              },
+            },
+          ],
+        },
+      ],
     },
     {
-      title: 'Media',
-      name: 'media',
+      title: 'Hero Media',
+      name: 'heroMedia',
       type: 'object',
       fields: mediaBlock,
     },
     {
-      title: 'Figure Number',
-      name: 'figureNumber',
+      title: 'Hero Media Ratio',
+      name: 'heroMediaRatio',
+      type: 'string',
+      options: {
+        list: ratioList,
+        layout: 'radio',
+      },
+    },
+    {
+      title: 'Hero Media Figure Number',
+      name: 'heroMediaFigureNumber',
       type: 'string',
     },
     {
-      title: 'Title',
-      name: 'title',
+      title: 'Hero Media Title',
+      name: 'heroMediaTitle',
       type: 'string',
     },
     {
-      title: 'Caption',
-      name: 'caption',
+      title: 'Hero Media Caption',
+      name: 'heroMediaCaption',
       type: 'text',
       rows: 3,
-    },
-    {
-      title: 'URL',
-      name: 'url',
-      type: 'url',
-      description: 'Optional link URL',
     },
   ],
   hidden: ({parent}: any) => parent?.component !== 'contentBlockPB',
@@ -194,36 +247,12 @@ const mediaBlockPB = {
   title: 'Media Block',
   name: 'mediaBlockPB',
   type: 'object',
-  description: 'This is a block for a single or two media items.',
   fields: [
     {
-      title: 'Media Items',
-      name: 'mediaItems',
-      type: 'array',
-      validation: (Rule: any) => Rule.min(1).max(2),
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {
-              title: 'Media',
-              name: 'media',
-              type: 'object',
-              fields: mediaBlock,
-            },
-            {
-              title: 'Figure Number',
-              name: 'figureNumber',
-              type: 'string',
-            },
-            {
-              title: 'Caption',
-              name: 'caption',
-              type: 'string',
-            },
-          ],
-        },
-      ],
+      title: 'Media',
+      name: 'media',
+      type: 'object',
+      fields: mediaBlock,
     },
     {
       title: 'Media Ratio',
@@ -233,6 +262,16 @@ const mediaBlockPB = {
         list: ratioList,
         layout: 'radio',
       },
+    },
+    {
+      title: 'Figure Number',
+      name: 'figureNumber',
+      type: 'string',
+    },
+    {
+      title: 'Caption',
+      name: 'caption',
+      type: 'string',
     },
   ],
   hidden: ({parent}: any) => parent?.component !== 'mediaBlockPB',
@@ -351,6 +390,31 @@ const considerationsBlockPB = {
   hidden: ({parent}: any) => parent?.component !== 'considerationsBlockPB',
 }
 
+const testimonialBlockPB = {
+  title: 'Testimonial Block',
+  name: 'testimonialBlockPB',
+  type: 'object',
+  fields: [
+    {
+      title: 'Quote',
+      name: 'quote',
+      type: 'text',
+      rows: 3,
+    },
+    {
+      title: 'Figure Number',
+      name: 'figureNumber',
+      type: 'string',
+    },
+    {
+      title: 'Author and Date',
+      name: 'authorAndDate',
+      type: 'string',
+    },
+  ],
+  hidden: ({parent}: any) => parent?.component !== 'testimonialBlockPB',
+}
+
 export {
   mediaBlock,
   imageObject,
@@ -364,4 +428,5 @@ export {
   mediaBlockPB,
   productGalleryBlockPB,
   considerationsBlockPB,
+  testimonialBlockPB,
 }

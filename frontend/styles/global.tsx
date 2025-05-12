@@ -9,7 +9,7 @@ export const GlobalStyles = createGlobalStyle`
 		--colour-primary: ${theme.colours.primary};
 		--colour-cream: ${theme.colours.cream};
 		--font-hal: ${theme.fonts.hal};
-		--font-mono: ${theme.fonts.mono};
+		--font-marfa: ${theme.fonts.marfa};
 		--transition-speed-default: ${theme.transitionSpeed.default};
 		--transition-speed-fast: ${theme.transitionSpeed.fast};
 		--transition-speed-extra-fast: ${theme.transitionSpeed.extraFast};
@@ -147,7 +147,7 @@ export const GlobalStyles = createGlobalStyle`
 	}
 
 	.type-subtitle {
-		font-family: var(--font-mono);
+		font-family: var(--font-marfa);
 		font-weight: 400;
 		font-size: ${pxToRem(10)};
 		line-height: normal;
@@ -155,7 +155,7 @@ export const GlobalStyles = createGlobalStyle`
 	}
 
 	.type-nav {
-		font-family: var(--font-mono);
+		font-family: var(--font-marfa);
 		font-weight: 400;
 		font-size: ${pxToRem(10)};
 		line-height: normal;
@@ -169,7 +169,7 @@ export const GlobalStyles = createGlobalStyle`
 	}
 
 	.type-small {
-		font-family: var(--font-mono);
+		font-family: var(--font-marfa);
 		font-weight: 400;
 		font-size: ${pxToRem(12)};
 		line-height: ${pxToRem(11)};

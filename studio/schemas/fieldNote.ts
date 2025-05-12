@@ -8,6 +8,8 @@ import {
   mediaBlock,
   mediaBlockPB,
   productGalleryBlockPB,
+  ratioList,
+  testimonialBlockPB,
 } from '../objects'
 
 export default {
@@ -35,6 +37,17 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      title: 'Categories',
+      name: 'categories',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'category'}],
+        },
+      ],
+    },
+    {
       title: 'Date',
       name: 'date',
       type: 'date',
@@ -45,6 +58,14 @@ export default {
       name: 'heroMedia',
       type: 'object',
       fields: mediaBlock,
+    },
+    {
+      title: 'Hero Media Ratio',
+      name: 'heroMediaRatio',
+      type: 'string',
+      options: {
+        list: ratioList,
+      },
     },
     {
       title: 'Hero Media Caption',
@@ -77,6 +98,8 @@ export default {
                 componentName = 'Product Gallery Block'
               } else if (component === 'considerationsBlockPB') {
                 componentName = 'Considerations Block'
+              } else if (component === 'testimonialBlockPB') {
+                componentName = 'Testimonial Block'
               } else {
                 componentName = 'Unknown'
               }
@@ -99,6 +122,7 @@ export default {
                   {title: 'Media Block', value: 'mediaBlockPB'},
                   {title: 'Product Gallery Block', value: 'productGalleryBlockPB'},
                   {title: 'Considerations Block', value: 'considerationsBlockPB'},
+                  {title: 'Testimonial Block', value: 'testimonialBlockPB'},
                 ],
                 layout: 'dropdown',
               },
@@ -109,6 +133,7 @@ export default {
             mediaBlockPB,
             productGalleryBlockPB,
             considerationsBlockPB,
+            testimonialBlockPB,
           ],
         },
       ],
