@@ -46,7 +46,7 @@ const Footer = (props: Props) => {
 
   return (
     <FooterWrapper className="footer">
-      <Link href={addressUrl}>
+      <Link href={addressUrl} target="_blank">
         <Address
           className="type-small"
           dangerouslySetInnerHTML={{ __html: formatHTML(address) }}
@@ -60,7 +60,7 @@ const Footer = (props: Props) => {
         )}
         <span>, </span>
         {instagramUrl && (
-          <Link href={instagramUrl}>
+          <Link href={instagramUrl} target="_blank">
             <TextSwitch resting="Instagram" hover={instagramUsername} />
           </Link>
         )}

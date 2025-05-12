@@ -8,6 +8,10 @@ import { useEffect, useState } from "react";
 const FieldNoteCardWrapper = styled.div`
   width: 100%;
   margin-bottom: 20vh;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    margin-bottom: 30vh;
+  }
 `;
 
 const MediaWrapper = styled.div<{ $ratio: string | undefined }>`

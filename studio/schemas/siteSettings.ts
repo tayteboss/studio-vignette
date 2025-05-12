@@ -54,6 +54,11 @@ export default {
           type: 'object',
           fields: [
             {
+              title: 'Credit',
+              name: 'credit',
+              type: 'string',
+            },
+            {
               title: 'Title',
               name: 'title',
               type: 'string',

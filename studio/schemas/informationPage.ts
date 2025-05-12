@@ -34,6 +34,28 @@ export default {
       rows: 4,
     },
     {
+      title: 'Social Links',
+      name: 'socialLinks',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              title: 'Social Title',
+              name: 'socialTitle',
+              type: 'string',
+            },
+            {
+              title: 'Social Link',
+              name: 'socialLink',
+              type: 'url',
+            },
+          ],
+        },
+      ],
+    },
+    {
       title: 'Media',
       name: 'media',
       type: 'object',
@@ -51,7 +73,7 @@ export default {
               title: 'Position',
               name: 'position',
               type: 'string',
-              description: 'e.g. [Left]',
+              description: 'e.g. L. or R.',
             },
             {
               title: 'Name',

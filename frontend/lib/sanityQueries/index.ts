@@ -100,6 +100,7 @@ export const siteSettingsQueryString = `
 		instagramUrl,
 		facebookUrl,
 		credits[] {
+			credit,
 			title,
 			link
 		}
@@ -120,10 +121,12 @@ export const informationPageQueryString = `
 		seoDescription,
 		profileText,
 		careersText,
+		socialLinks[] {
+			socialTitle,
+			socialLink
+		},
 		media {
-			media {
-				${mediaString}
-			}
+			${mediaString}
 		},
 		mediaIdentifiers[] {
 			position,

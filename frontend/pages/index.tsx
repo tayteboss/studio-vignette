@@ -3,16 +3,13 @@ import { NextSeo } from "next-seo";
 import {
   FieldNoteType,
   HomePageType,
-  SiteSettingsType,
   TransitionsType,
 } from "../shared/types/types";
 import { motion } from "framer-motion";
 import client from "../client";
 import {
-  fieldNotesQueryString,
   fieldNotesQueryStringSimplified,
   homePageQueryString,
-  siteSettingsQueryString,
 } from "../lib/sanityQueries";
 import { useEffect, useState } from "react";
 import HomeTitle from "../components/blocks/HomeTitle";
@@ -23,21 +20,16 @@ const PageWrapper = styled(motion.div)``;
 
 type Props = {
   data: HomePageType;
-  siteSettings: SiteSettingsType;
   fieldNotes: FieldNoteType[];
   pageTransitionVariants: TransitionsType;
 };
 
 const Page = (props: Props) => {
-  const { data, siteSettings, fieldNotes, pageTransitionVariants } = props;
+  const { data, fieldNotes, pageTransitionVariants } = props;
 
   const [heroTitle, setHeroTitle] = useState<string | FieldNoteType>(
     data?.title
   );
-
-  console.log("data", data);
-  console.log("siteSettings", siteSettings);
-  console.log("fieldNotes", fieldNotes);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -70,7 +62,6 @@ const Page = (props: Props) => {
 };
 
 export async function getStaticProps() {
-  const siteSettings = await client.fetch(siteSettingsQueryString);
   const data = await client.fetch(homePageQueryString);
   let fieldNotes = await client.fetch(fieldNotesQueryStringSimplified);
 
@@ -92,7 +83,6 @@ export async function getStaticProps() {
   return {
     props: {
       data,
-      siteSettings,
       fieldNotes,
     },
   };

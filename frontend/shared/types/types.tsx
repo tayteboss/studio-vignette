@@ -40,6 +40,11 @@ export type SlugType = {
   current: string;
 };
 
+export type SocialLinkType = {
+  socialTitle: string;
+  socialLink: string;
+};
+
 export type SiteSettingsType = {
   referenceTitle: string;
   address: string;
@@ -50,6 +55,7 @@ export type SiteSettingsType = {
   instagramUsername: string;
   facebookUrl: string;
   credits: {
+    credit: string;
     title: string;
     link: string;
   }[];
@@ -71,6 +77,7 @@ export type InformationPageType = {
   seoDescription: string;
   profileText: string;
   careersText: string;
+  socialLinks: SocialLinkType[];
   media: MediaType;
   mediaIdentifiers: {
     position: string;
