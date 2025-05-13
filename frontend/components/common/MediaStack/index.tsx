@@ -37,7 +37,7 @@ const MediaStack = (props: Props) => {
   });
 
   return (
-    <MediaStackWrapper ref={ref}>
+    <MediaStackWrapper ref={ref} className="media-stack">
       {useVideo && (
         <VideoComponent
           data={data}

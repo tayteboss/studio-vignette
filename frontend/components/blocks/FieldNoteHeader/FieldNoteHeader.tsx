@@ -22,11 +22,20 @@ const Inner = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: ${pxToRem(100)};
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    padding: ${pxToRem(80)} 0 ${pxToRem(50)};
+    gap: ${pxToRem(50)};
+  }
 `;
 
 const ContentWrapper = styled.div`
   .layout-grid {
     align-items: center;
+
+    @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+      grid-row-gap: ${pxToRem(50)};
+    }
   }
 `;
 
@@ -35,6 +44,10 @@ const Left = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    grid-column: 1 / -1;
+  }
 `;
 
 const SmallTitle = styled.p`
@@ -54,6 +67,10 @@ const Category = styled.span`
 
 const Middle = styled.div`
   grid-column: span 4;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    grid-column: 1 / -1;
+  }
 `;
 
 const Title = styled.p`
@@ -63,9 +80,8 @@ const Title = styled.p`
 
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
     &.type-h1 {
-      font-size: ${pxToRem(20)};
-      line-height: ${pxToRem(23)};
-      letter-spacing: -0.4px;
+      font-size: ${pxToRem(28)};
+      line-height: ${pxToRem(26)};
     }
   }
 `;
@@ -75,6 +91,10 @@ const Right = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    grid-column: 1 / -1;
+  }
 `;
 
 const Date = styled.span`
@@ -86,6 +106,13 @@ const MediaWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    flex: unset;
+    width: 80%;
+    margin: 0 auto;
+    align-items: flex-end;
+  }
 `;
 
 const convertRatioToAspectRatio = (ratio: string): string => {
@@ -101,9 +128,19 @@ const MediaInner = styled.div<{ $ratio: string }>`
   width: auto;
   max-width: 100%;
 
-  * {
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    height: auto;
+    width: 100%;
+  }
+
+  .media-stack {
     height: 100%;
     width: 100%;
+
+    * {
+      height: 100%;
+      width: 100%;
+    }
   }
 `;
 
@@ -185,7 +222,7 @@ const FieldNoteHeader = (props: Props) => {
             </LayoutGrid>
           </ContentWrapper>
           <MediaWrapper>
-            <MediaInner $ratio={heroMediaRatio || "1/1"}>
+            <MediaInner $ratio={heroMediaRatio || undefined}>
               {heroMedia && <MediaStack data={heroMedia} />}
               {heroMediaCaption && (
                 <MediaCaption className="type-h6">
