@@ -20,10 +20,7 @@ import ContentCard from "../components/elements/ContentCard";
 import OfficeCard from "../components/elements/OfficeCard";
 import ContentCredits from "../components/blocks/ContentCredits";
 
-const PageWrapper = styled(motion.div)`
-  .layout-grid {
-  }
-`;
+const PageWrapper = styled(motion.div)``;
 
 const ImageWrapper = styled.div`
   grid-column: 1 / 5;
@@ -34,6 +31,14 @@ const ImageWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   padding-top: ${pxToRem(64)};
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    grid-column: 5 / -1;
+    padding-top: ${pxToRem(50)};
+    margin-bottom: ${pxToRem(50)};
+    min-height: unset;
+    flex-direction: column-reverse;
+  }
 `;
 
 const MediaWrapper = styled.div`
@@ -57,6 +62,11 @@ const ContentWrapper = styled.div`
   grid-template-columns: subgrid;
   grid-template-rows: 1fr auto;
   padding-top: ${pxToRem(20)};
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    grid-column: 1 / -1;
+    padding-top: 0;
+  }
 `;
 
 const ContentTop = styled.div`
@@ -65,6 +75,11 @@ const ContentTop = styled.div`
   grid-column: 1 / -1;
   align-content: start;
   grid-row-gap: ${pxToRem(20)};
+  margin-bottom: ${pxToRem(40)};
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    grid-row-gap: ${pxToRem(50)};
+  }
 
   > * {
     grid-column: 1 / -1;

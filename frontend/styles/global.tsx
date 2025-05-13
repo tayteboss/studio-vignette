@@ -47,6 +47,12 @@ export const GlobalStyles = createGlobalStyle`
 		}
 	}
 
+	.page-information {
+		.footer {
+			display: none;
+		}
+	}
+
 	html {
 		background: var(--colour-cream);
 		color: var(--colour-primary);

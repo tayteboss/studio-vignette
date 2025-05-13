@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { FieldNoteType, HomePageType } from "../../../shared/types/types";
 import LayoutWrapper from "../../layout/LayoutWrapper";
 import { AnimatePresence, motion } from "framer-motion";
+import pxToRem from "../../../utils/pxToRem";
 
 const HomeTitleWrapper = styled.section`
   position: fixed;
@@ -22,6 +23,14 @@ const Inner = styled.div`
 
 const Title = styled(motion.h1)`
   text-align: center;
+`;
+
+const DefaultTitle = styled(motion.h1)`
+  text-align: center;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    max-width: ${pxToRem(270)};
+  }
 `;
 
 const FieldNoteTitle = styled(motion.div)`
@@ -75,22 +84,23 @@ const HomeTitle = (props: Props) => {
                 exit="hidden"
                 key="field-note-title"
               >
-                <Title>{data?.numeralIndex || ""}.</Title>
-                <Title>{data?.title || ""}</Title>
-                <Title>
+                <Title className="type-h1">{data?.numeralIndex || ""}.</Title>
+                <Title className="type-h1">{data?.title || ""}</Title>
+                <Title className="type-h1">
                   {data?.season || ""}, {formatYear(data?.date) || ""}
                 </Title>
               </FieldNoteTitle>
             ) : (
-              <Title
+              <DefaultTitle
                 variants={wrapperVariants}
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
                 key="regular-title"
+                className="type-h1"
               >
                 {data}
-              </Title>
+              </DefaultTitle>
             )}
           </AnimatePresence>
         </Inner>

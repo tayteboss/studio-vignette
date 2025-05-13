@@ -5,6 +5,7 @@ import {
 } from "../../../shared/types/types";
 import Link from "next/link";
 import formatHTML from "../../../utils/formatHTML";
+import pxToRem from "../../../utils/pxToRem";
 
 const OfficeCardWrapper = styled.div`
   display: grid;
@@ -14,10 +15,19 @@ const OfficeCardWrapper = styled.div`
 
 const Title = styled.h2`
   grid-column: span 2;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    grid-column: 1 / -1;
+    margin-bottom: ${pxToRem(16)};
+  }
 `;
 
 const ContentWrapper = styled.div`
   grid-column: span 4;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    grid-column: 1 / -1;
+  }
 `;
 
 const AddressWrapper = styled.div``;

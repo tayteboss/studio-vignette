@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { SiteSettingsType } from "../../../shared/types/types";
 import CreditsItem from "../../elements/CreditsItem";
-
+import pxToRem from "../../../utils/pxToRem";
 const ContentCreditsWrapper = styled.div`
   display: grid;
   grid-template-columns: subgrid;
@@ -10,10 +10,19 @@ const ContentCreditsWrapper = styled.div`
 
 const Title = styled.h2`
   grid-column: span 2;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    grid-column: 1 / -1;
+    margin-bottom: ${pxToRem(16)};
+  }
 `;
 
 const ContentWrapper = styled.div`
   grid-column: span 4;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    grid-column: 1 / -1;
+  }
 `;
 
 type Props = {
