@@ -13,6 +13,11 @@ const FieldNoteHeaderWrapper = styled.section`
   justify-content: space-between;
   gap: ${pxToRem(100)};
   height: 100vh;
+  margin-bottom: ${pxToRem(100)};
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    margin-bottom: ${pxToRem(50)};
+  }
 `;
 
 const Inner = styled.div`

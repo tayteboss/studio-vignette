@@ -1,45 +1,52 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import HeadingBlock from "../../blocks/HeadingBlock";
+import ContentBlock from "../../blocks/ContentBlock";
+import ImageGalleryBlock from "../../blocks/ImageGalleryBlock";
+import MediaBlock from "../../blocks/MediaBlock";
+import ProductGalleryBlock from "../../blocks/ProductGalleryBlock";
+import ConsiderationsBlock from "../../blocks/ConsiderationsBlock";
+import TestimonialBlock from "../../blocks/TestimonialBlock";
 
 type Props = {
-	data: any;
+  data: any;
 };
 
 const PageBuilderWrapper = styled.div``;
 
 const PageBuilder = (props: Props) => {
-	const { data } = props;
+  const { data } = props;
 
-	// const sections: any = {
-	// 	richText: RichTextSection,
-	// 	media: MediaSection
-	// };
+  const sections: any = {
+    headingBlockPB: HeadingBlock,
+    contentBlockPB: ContentBlock,
+    imageGalleryBlockPB: ImageGalleryBlock,
+    mediaBlockPB: MediaBlock,
+    productGalleryBlockPB: ProductGalleryBlock,
+    considerationsBlockPB: ConsiderationsBlock,
+    testimonialBlockPB: TestimonialBlock,
+  };
 
-	const sections: any = {};
-
-	return (
-		<PageBuilderWrapper className="page-builder">
-			{data &&
-				data.map((section: any, i: number) => {
-					{
-						if (!sections[section._type]) {
-							return (
-								<div key={Math.random() * 10000}>
-									No section found for {section._type}
-								</div>
-							);
-						} else {
-							const Component = sections[section._type];
-							return (
-								<Component
-									key={`${section._type}-${i}`}
-									{...section}
-								/>
-							);
-						}
-					}
-				})}
-		</PageBuilderWrapper>
-	);
+  return (
+    <PageBuilderWrapper className="page-builder">
+      {data &&
+        data.map((section: any, i: number) => {
+          {
+            if (!sections[section.component]) {
+              return (
+                <div key={Math.random() * 10000}>
+                  No section found for {section.component}
+                </div>
+              );
+            } else {
+              const Component = sections[section.component];
+              return (
+                <Component key={`${section.component}-${i}`} {...section} />
+              );
+            }
+          }
+        })}
+    </PageBuilderWrapper>
+  );
 };
 
 export default PageBuilder;
