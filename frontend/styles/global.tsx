@@ -193,7 +193,7 @@ export const GlobalStyles = createGlobalStyle`
 		font-family: var(--font-marfa);
 		font-weight: 400;
 		font-size: ${pxToRem(12)};
-		line-height: normal;
+		line-height: 1;
 
 		* {
 			font-family: var(--font-marfa);

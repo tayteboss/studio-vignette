@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import HomeTitle from "../components/blocks/HomeTitle";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import HomeFieldNotes from "../components/blocks/HomeFieldNotes";
+import { addNumeralsToFieldNotes } from "../utils/fieldNotes";
 
 const PageWrapper = styled(motion.div)``;
 
@@ -65,20 +66,7 @@ export async function getStaticProps() {
   const data = await client.fetch(homePageQueryString);
   let fieldNotes = await client.fetch(fieldNotesQueryStringSimplified);
 
-  const fieldNotesWithNumerals = fieldNotes.map(
-    (note: FieldNoteType, index: number) => ({
-      ...note,
-      numeralIndex: Array(index + 1)
-        .fill("I")
-        .join("")
-        .replace(/IIIII/g, "V")
-        .replace(/VV/g, "X")
-        .replace(/XXXXX/g, "L")
-        .replace(/LL/g, "C"),
-    })
-  );
-
-  fieldNotes = fieldNotesWithNumerals;
+  fieldNotes = addNumeralsToFieldNotes(fieldNotes);
 
   return {
     props: {

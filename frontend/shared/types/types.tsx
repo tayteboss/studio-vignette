@@ -186,7 +186,7 @@ export type FieldNoteType = {
   title: string;
   slug: SlugType;
   categories?: {
-    _ref: string;
+    name: string;
   }[];
   numeralIndex: string;
   date: string;

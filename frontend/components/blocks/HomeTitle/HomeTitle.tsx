@@ -3,6 +3,9 @@ import { FieldNoteType, HomePageType } from "../../../shared/types/types";
 import LayoutWrapper from "../../layout/LayoutWrapper";
 import { AnimatePresence, motion } from "framer-motion";
 import pxToRem from "../../../utils/pxToRem";
+import { formatYear } from "../../../utils/date";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const HomeTitleWrapper = styled.section`
   position: fixed;
@@ -66,10 +69,12 @@ const HomeTitle = (props: Props) => {
 
   const isFieldNote = typeof data !== "string";
 
-  const formatYear = (date: string) => {
-    const year = new Date(date).getFullYear();
-    return year;
-  };
+  const [formattedYear, setFormattedYear] = useState<string>("");
+
+  useEffect(() => {
+    if (!isFieldNote || !data?.date) return;
+    setFormattedYear(formatYear(data.date));
+  }, [data, isFieldNote]);
 
   return (
     <HomeTitleWrapper>
@@ -87,7 +92,7 @@ const HomeTitle = (props: Props) => {
                 <Title className="type-h1">{data?.numeralIndex || ""}.</Title>
                 <Title className="type-h1">{data?.title || ""}</Title>
                 <Title className="type-h1">
-                  {data?.season || ""}, {formatYear(data?.date) || ""}
+                  {data?.season || ""}, {formattedYear || ""}
                 </Title>
               </FieldNoteTitle>
             ) : (

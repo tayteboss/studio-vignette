@@ -166,6 +166,9 @@ export const fieldNotesQueryStringSimplified = `
 		slug,
 		date,
 		season,
+		categories[]-> {
+			name
+		},
 		heroMedia {
 			${mediaString}
 		},

@@ -33,8 +33,6 @@ const LinkTag = styled.div<{ $isActive: boolean }>`
 const Header = () => {
   const activeLink = useActiveLink();
 
-  console.log("activeLink", activeLink);
-
   return (
     <HeaderWrapper className="header">
       <Link href="/">
