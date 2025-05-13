@@ -30,6 +30,7 @@ export const pageBuilderBlockString = `
 			media {
 				${mediaString}
 			},
+			mediaRatio,
 			figureNumber,
 			title,
 			caption,
@@ -39,7 +40,9 @@ export const pageBuilderBlockString = `
 			${mediaString}
 		},
 		heroMediaRatio,
-		heroMediaFigureNumber
+		heroMediaFigureNumber,
+		heroMediaTitle,
+		heroMediaCaption
 	},
 	imageGalleryBlockPB {
 		galleryItems[] {

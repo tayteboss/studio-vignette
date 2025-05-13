@@ -101,6 +101,7 @@ export type ContentBlock = {
     contentBlock: Array<{
       content?: string;
       media?: MediaType;
+      mediaRatio?: MediaRatioType;
       figureNumber?: string;
       title?: string;
       caption?: string;
@@ -109,6 +110,8 @@ export type ContentBlock = {
     heroMedia?: MediaType;
     heroMediaRatio?: MediaRatioType;
     heroMediaFigureNumber?: string;
+    heroMediaTitle?: string;
+    heroMediaCaption?: string;
   };
 };
 

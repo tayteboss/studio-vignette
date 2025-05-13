@@ -203,6 +203,7 @@ const imageGalleryBlockPB = {
       title: 'Gallery Items',
       name: 'galleryItems',
       type: 'array',
+      description: 'This gallery works best with no more than 5 images',
       of: [
         {
           type: 'object',

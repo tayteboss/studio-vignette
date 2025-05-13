@@ -228,7 +228,7 @@ const FieldNoteHeader = (props: Props) => {
           </ContentWrapper>
           <MediaWrapper>
             <MediaInner $ratio={heroMediaRatio || undefined}>
-              {heroMedia && <MediaStack data={heroMedia} />}
+              {heroMedia && <MediaStack data={heroMedia} isPriority={true} />}
               {heroMediaCaption && (
                 <MediaCaption className="type-h6">
                   <span>I.</span>
