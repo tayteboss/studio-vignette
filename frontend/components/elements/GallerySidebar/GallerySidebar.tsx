@@ -49,6 +49,7 @@ const GallerySidebar = (props: Props) => {
     <GallerySidebarWrapper>
       {galleryItems.map((item, i) => (
         <MediaWrapper
+          key={i}
           $isActive={activeIndex === i}
           onClick={() => setActiveIndex(i)}
         >

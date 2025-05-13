@@ -18,7 +18,7 @@ const Inner = styled.div`
 
 const Subheading = styled.h2`
   position: absolute;
-  top: 5px;
+  top: 8px;
   left: 0;
 
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { ImageGalleryBlock } from "../../../shared/types/types";
 import pxToRem from "../../../utils/pxToRem";
 import MediaStack from "../../common/MediaStack";
+import useViewportWidth from "../../../hooks/useViewportWidth";
 
 const GallerySidebarMobileWrapper = styled.div`
   display: none;
@@ -54,26 +55,32 @@ type Props = {
 
 const GallerySidebarMobile = (props: Props) => {
   const { activeIndex, setActiveIndex, galleryItems } = props;
+
+  const viewport = useViewportWidth();
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "start",
     containScroll: "trimSnaps",
   });
-
   useEffect(() => {
+    if (viewport !== "mobile" && viewport !== "tablet-portrait") return;
+
     if (emblaApi) {
       emblaApi.scrollTo(activeIndex);
     }
-  }, [emblaApi, activeIndex]);
+  }, [emblaApi, activeIndex, viewport]);
 
   useEffect(() => {
+    if (viewport !== "mobile" && viewport !== "tablet-portrait") return;
+
     if (emblaApi) {
       emblaApi.on("select", () => {
         setActiveIndex(emblaApi.selectedScrollSnap());
         emblaApi.scrollTo(activeIndex);
       });
     }
-  }, [emblaApi, setActiveIndex]);
+  }, [emblaApi, setActiveIndex, viewport]);
 
   return (
     <GallerySidebarMobileWrapper>

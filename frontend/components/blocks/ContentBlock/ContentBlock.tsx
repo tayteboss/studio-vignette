@@ -158,7 +158,7 @@ const ContentBlock = (props: Props) => {
                       <Caption>
                         {section?.figureNumber && (
                           <CaptionText className="type-h6">
-                            {section?.figureNumber}
+                            {section?.figureNumber}.
                           </CaptionText>
                         )}
                         {section?.caption && (
