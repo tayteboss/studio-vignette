@@ -149,6 +149,9 @@ export const fieldNotesQueryString = `
 		slug,
 		date,
 		season,
+		categories[]-> {
+			name
+		},
 		heroMedia {
 			${mediaString}
 		},
