@@ -54,8 +54,6 @@ const MediaBlock = (props: Props) => {
 
   const { media, mediaRatio, figureNumber, caption } = mediaBlockPB;
 
-  console.log(mediaRatio);
-
   return (
     <MediaBlockWrapper>
       <LayoutWrapper>

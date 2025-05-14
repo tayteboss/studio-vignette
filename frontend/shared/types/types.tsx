@@ -142,10 +142,18 @@ export type ProductGalleryBlock = {
   component: "productGalleryBlockPB";
   productGalleryBlockPB: {
     products: Array<{
-      media: MediaType;
+      image?: {
+        asset: {
+          url: string;
+        };
+      };
       title: string;
       description?: string;
-      url?: string;
+      link?: string;
+      features?: Array<{
+        title: string;
+        value: string;
+      }>;
     }>;
   };
 };

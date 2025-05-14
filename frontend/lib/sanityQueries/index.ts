@@ -65,12 +65,18 @@ export const pageBuilderBlockString = `
 	},
 	productGalleryBlockPB {
 		products[] {
-			media {
-				${mediaString}
+			image {
+				asset-> {
+					url
+				}
 			},
 			title,
 			description,
-			url
+			link,
+			features[] {
+				title,
+				value
+			}
 		}
 	},
 	considerationsBlockPB {

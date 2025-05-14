@@ -193,7 +193,7 @@ export const GlobalStyles = createGlobalStyle`
 		font-family: var(--font-marfa);
 		font-weight: 400;
 		font-size: ${pxToRem(12)};
-		line-height: 1;
+		line-height: 1.2;
 
 		* {
 			font-family: var(--font-marfa);
@@ -217,6 +217,14 @@ export const GlobalStyles = createGlobalStyle`
 			line-height: normal;
 			letter-spacing: 0.36px;
 		}
+	}
+
+	.uppercase {
+		text-transform: uppercase;
+	}
+
+	.underline {
+		text-decoration: underline;
 	}
 
 	mux-player {
@@ -308,7 +316,6 @@ export const GlobalStyles = createGlobalStyle`
 	}
 
 	.embla__slide {
-		flex: 0 0 100%;
 		min-width: 0;
 	}
 

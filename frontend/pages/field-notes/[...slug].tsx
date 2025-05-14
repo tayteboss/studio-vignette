@@ -88,16 +88,6 @@ export async function getStaticProps({ params }: any) {
     *[_type == 'fieldNote'] | order(date desc) [0...100] {
       title,
       slug,
-      date,
-      season,
-      categories[]-> {
-        name
-      },
-      heroMedia {
-        ${mediaString}
-      },
-      heroMediaRatio,
-      heroMediaCaption
     }
   `;
 
