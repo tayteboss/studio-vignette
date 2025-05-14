@@ -11,6 +11,7 @@ import MoreNotes from "../../components/blocks/MoreNotes";
 import { useViewedFieldNotes } from "../../hooks/useViewedFieldNotes";
 import pxToRem from "../../utils/pxToRem";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const PageWrapper = styled(motion.div)``;
 
@@ -40,6 +41,10 @@ const Page = (props: Props) => {
   const viewedFieldNotes = useViewedFieldNotes(data?.slug?.current);
 
   const router = useRouter();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <PageWrapper
