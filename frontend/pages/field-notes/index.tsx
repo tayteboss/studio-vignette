@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import client from "../../client";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   FieldNoteType,
   FieldNotesPageType,
@@ -12,10 +12,12 @@ import {
   fieldNotesQueryStringSimplified,
 } from "../../lib/sanityQueries";
 import LayoutWrapper from "../../components/layout/LayoutWrapper";
-import LayoutGrid from "../../components/layout/LayoutGrid";
-import FieldNoteThumbnailCard from "../../components/blocks/FieldNoteThumbnailCard";
 import { addNumeralsToFieldNotes } from "../../utils/fieldNotes";
 import pxToRem from "../../utils/pxToRem";
+import { useViewedFieldNotes } from "../../hooks/useViewedFieldNotes";
+import FieldsNotesList from "../../components/blocks/FieldsNotesList";
+import MediaStack from "../../components/common/MediaStack";
+import { useState } from "react";
 
 const PageWrapper = styled(motion.div)`
   min-height: 100vh;
@@ -23,15 +25,43 @@ const PageWrapper = styled(motion.div)`
   padding-top: ${pxToRem(100)};
 `;
 
-const FieldNotesList = styled.section`
-  .layout-grid {
-    grid-row-gap: ${pxToRem(20)};
+const FieldNotesWrapper = styled.section``;
 
-    @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-      grid-row-gap: ${pxToRem(10)};
-    }
+const MediaWrapper = styled(motion.section)<{
+  $ratio: string;
+  $isPortrait: boolean;
+}>`
+  position: fixed;
+  bottom: ${pxToRem(20)};
+  right: ${pxToRem(20)};
+  z-index: 100;
+  width: ${(props) => (props.$isPortrait ? "25vw" : "33vw")};
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    display: none;
+  }
+
+  .media-wrapper {
+    padding-top: ${(props) => props.$ratio};
   }
 `;
+
+const wrapperVariants = {
+  hidden: {
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+};
 
 type Props = {
   data: FieldNotesPageType;
@@ -42,7 +72,11 @@ type Props = {
 const Page = (props: Props) => {
   const { data, fieldNotes, pageTransitionVariants } = props;
 
-  console.log("fieldNotes", fieldNotes);
+  const [activeFieldNote, setActiveFieldNote] = useState<false | FieldNoteType>(
+    false
+  );
+
+  const viewedFieldNotes = useViewedFieldNotes();
 
   const hasFieldNotes = fieldNotes && fieldNotes.length > 0;
 
@@ -57,26 +91,32 @@ const Page = (props: Props) => {
         title={data?.seoTitle || ""}
         description={data?.seoDescription || ""}
       />
-      <FieldNotesList>
+      <FieldNotesWrapper>
         <LayoutWrapper>
-          <LayoutGrid>
-            {hasFieldNotes &&
-              fieldNotes.map((fieldNote) => (
-                <FieldNoteThumbnailCard
-                  key={fieldNote.slug.current}
-                  date={fieldNote.date}
-                  heroMedia={fieldNote.heroMedia}
-                  heroMediaRatio={fieldNote.heroMediaRatio}
-                  title={fieldNote.title}
-                  slug={fieldNote.slug}
-                  numeralIndex={fieldNote.numeralIndex}
-                  season={fieldNote.season}
-                  categories={fieldNote.categories}
-                />
-              ))}
-          </LayoutGrid>
+          {hasFieldNotes && (
+            <FieldsNotesList
+              data={fieldNotes}
+              viewedFieldNotes={viewedFieldNotes}
+              useImageHover={true}
+              setActiveFieldNote={setActiveFieldNote}
+            />
+          )}
         </LayoutWrapper>
-      </FieldNotesList>
+      </FieldNotesWrapper>
+      <AnimatePresence mode="wait">
+        {activeFieldNote && (
+          <MediaWrapper
+            variants={wrapperVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            $ratio={activeFieldNote.heroMediaRatio || "56.25%"}
+            $isPortrait={parseInt(activeFieldNote.heroMediaRatio || "0") >= 100}
+          >
+            <MediaStack data={activeFieldNote.heroMedia} />
+          </MediaWrapper>
+        )}
+      </AnimatePresence>
     </PageWrapper>
   );
 };

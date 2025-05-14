@@ -5,11 +5,10 @@ import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { mediaString, pageBuilderBlockString } from "../../lib/sanityQueries";
 import { addNumeralsToFieldNotes } from "../../utils/fieldNotes";
-import { addViewedFieldNote, getViewedFieldNotes } from "../../utils/cookies";
 import PageBuilder from "../../components/common/PageBuilder";
 import FieldNoteHeader from "../../components/blocks/FieldNoteHeader";
 import MoreNotes from "../../components/blocks/MoreNotes";
-import { useEffect, useState } from "react";
+import { useViewedFieldNotes } from "../../hooks/useViewedFieldNotes";
 
 const PageWrapper = styled(motion.div)``;
 
@@ -21,24 +20,7 @@ type Props = {
 
 const Page = (props: Props) => {
   const { data, fieldNotesWithNumerals, pageTransitionVariants } = props;
-  const [viewedFieldNotes, setViewedFieldNotes] = useState<string[]>([]);
-
-  useEffect(() => {
-    // Get initial viewed notes
-    const initialViewedNotes = getViewedFieldNotes();
-    setViewedFieldNotes(initialViewedNotes);
-
-    // Add current note to viewed notes if it exists
-    if (data?.slug?.current) {
-      addViewedFieldNote(data.slug.current);
-      setViewedFieldNotes((prev) => {
-        if (!prev.includes(data.slug.current)) {
-          return [...prev, data.slug.current];
-        }
-        return prev;
-      });
-    }
-  }, [data?.slug?.current]);
+  const viewedFieldNotes = useViewedFieldNotes(data?.slug?.current);
 
   return (
     <PageWrapper

@@ -44,7 +44,7 @@ const placeholderVariants = {
     opacity: 0,
     filter: "blur(0px)",
     scale: 1, // Keep scale at 1 for exit during this test
-    transition: { duration: 1, ease: "easeIn" },
+    transition: { duration: 0.5, ease: "easeIn" },
   },
 };
 
@@ -54,13 +54,13 @@ const mainImageVariants = {
   initial: {
     opacity: 0,
     filter: "blur(15px)", // Optional: If you wanted the main image to also de-blur
-    scale: 1.05,
+    scale: 1.01,
   },
   animate: {
     opacity: 1,
     filter: "blur(0px)",
     scale: 1,
-    transition: { duration: 1, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
@@ -139,7 +139,7 @@ const ImageComponent = (props: Props) => {
             style={{
               objectFit: "cover",
               // filter: "blur(20px)",
-              transform: "scale(1.05)",
+              transform: "scale(1.01)",
             }}
             sizes={sizes}
             loading="eager"

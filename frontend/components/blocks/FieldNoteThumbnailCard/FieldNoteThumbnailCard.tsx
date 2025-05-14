@@ -7,11 +7,15 @@ import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import pxToRem from "../../../utils/pxToRem";
 
-const FieldNoteThumbnailCardWrapper = styled.div<{ $inView: boolean }>`
+const FieldNoteThumbnailCardWrapper = styled.div<{
+  $inView: boolean;
+  $isViewed: boolean;
+}>`
   grid-column: span 4;
   width: 100%;
   position: relative;
   border: 1px solid var(--colour-primary);
+  opacity: ${(props) => (props.$isViewed ? 0.7 : 1)};
 
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
     grid-column: 1 / -1;
@@ -155,6 +159,7 @@ type Props = {
   numeralIndex: FieldNoteType["numeralIndex"];
   season: FieldNoteType["season"];
   categories: FieldNoteType["categories"];
+  isViewed?: boolean;
 };
 
 const FieldNoteThumbnailCard = (props: Props) => {
@@ -167,6 +172,7 @@ const FieldNoteThumbnailCard = (props: Props) => {
     numeralIndex,
     season,
     categories,
+    isViewed = false,
   } = props;
 
   const [formattedYear, setFormattedYear] = useState<string>("");
@@ -189,6 +195,7 @@ const FieldNoteThumbnailCard = (props: Props) => {
       className="field-note-card"
       ref={ref}
       $inView={inView}
+      $isViewed={isViewed}
     >
       <Link href={`/field-notes/${slug.current}`}>
         <MediaWrapper
