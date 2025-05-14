@@ -34,16 +34,16 @@ const Page = (props: Props) => {
         description={data?.heroMediaCaption || ""}
       />
       <FieldNoteHeader
-        categories={data.categories}
-        date={data.date}
-        season={data.season}
-        title={data.title}
-        heroMedia={data.heroMedia}
-        heroMediaRatio={data.heroMediaRatio}
-        heroMediaCaption={data.heroMediaCaption}
-        numeralIndex={data.numeralIndex}
+        categories={data?.categories}
+        date={data?.date}
+        season={data?.season}
+        title={data?.title}
+        heroMedia={data?.heroMedia}
+        heroMediaRatio={data?.heroMediaRatio}
+        heroMediaCaption={data?.heroMediaCaption}
+        numeralIndex={data?.numeralIndex}
       />
-      <PageBuilder data={data.pageBuilder} />
+      <PageBuilder data={data?.pageBuilder} />
       <MoreNotes
         data={fieldNotesWithNumerals}
         viewedFieldNotes={viewedFieldNotes}

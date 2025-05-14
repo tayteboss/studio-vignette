@@ -46,6 +46,10 @@ export default {
           to: [{type: 'category'}],
         },
       ],
+      validation: (Rule: any) => [
+        Rule.required().error('Categories are required'),
+        Rule.min(1).error('At least one category must be selected'),
+      ],
     },
     {
       title: 'Date',

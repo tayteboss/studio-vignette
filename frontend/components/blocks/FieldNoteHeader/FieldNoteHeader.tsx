@@ -229,7 +229,7 @@ const FieldNoteHeader = (props: Props) => {
             </LayoutGrid>
           </ContentWrapper>
           <MediaWrapper>
-            <MediaInner $ratio={heroMediaRatio || undefined}>
+            <MediaInner $ratio={heroMediaRatio || "0"}>
               {heroMedia && <MediaStack data={heroMedia} isPriority={true} />}
               {heroMediaCaption && (
                 <MediaCaption className="type-h6">

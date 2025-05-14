@@ -131,6 +131,8 @@ const FieldsNotesList = (props: Props) => {
     setActiveFieldNote = () => {},
   } = props;
 
+  const hasData = data && data.length > 0;
+
   return (
     <FieldNotesListWrapper>
       <NotesHeader>
@@ -142,39 +144,44 @@ const FieldsNotesList = (props: Props) => {
         </LayoutGrid>
       </NotesHeader>
       <NotesList>
-        {data.map((note) => (
-          <NoteInner
-            key={note.slug.current}
-            onMouseOver={() => useImageHover && setActiveFieldNote(note)}
-            onMouseOut={() => useImageHover && setActiveFieldNote(false)}
-          >
-            <Link href={`/field-notes/${note.slug.current}`}>
-              <LayoutGrid>
-                <NoteNumber
-                  $isViewed={viewedFieldNotes.includes(note.slug.current)}
-                >
-                  {note.numeralIndex}.
-                </NoteNumber>
-                <NoteTitle
-                  $isViewed={viewedFieldNotes.includes(note.slug.current)}
-                >
-                  {note.title}, {note.season || ""}{" "}
-                  {formatYear(note.date) || ""}
-                </NoteTitle>
-                <NoteCategories
-                  $isViewed={viewedFieldNotes.includes(note.slug.current)}
-                >
-                  {note.categories?.map((category) => category.name).join(", ")}
-                </NoteCategories>
-                <NoteDate
-                  $isViewed={viewedFieldNotes.includes(note.slug.current)}
-                >
-                  {formatDate(note.date)}
-                </NoteDate>
-              </LayoutGrid>
-            </Link>
-          </NoteInner>
-        ))}
+        {hasData &&
+          data.map((note) => (
+            <NoteInner
+              key={note.slug.current}
+              onMouseOver={() => useImageHover && setActiveFieldNote(note)}
+              onMouseOut={() => useImageHover && setActiveFieldNote(false)}
+            >
+              <Link href={`/field-notes/${note.slug.current}`}>
+                <LayoutGrid>
+                  <NoteNumber
+                    $isViewed={viewedFieldNotes.includes(note.slug.current)}
+                  >
+                    {note.numeralIndex}.
+                  </NoteNumber>
+                  <NoteTitle
+                    $isViewed={viewedFieldNotes.includes(note.slug.current)}
+                  >
+                    {note.title}, {note.season || ""}{" "}
+                    {formatYear(note.date) || ""}
+                  </NoteTitle>
+                  <NoteCategories
+                    $isViewed={viewedFieldNotes.includes(note.slug.current)}
+                  >
+                    {note?.categories && note?.categories.length > 0
+                      ? note.categories
+                          .map((category) => category.name)
+                          .join(", ")
+                      : ""}
+                  </NoteCategories>
+                  <NoteDate
+                    $isViewed={viewedFieldNotes.includes(note.slug.current)}
+                  >
+                    {formatDate(note.date)}
+                  </NoteDate>
+                </LayoutGrid>
+              </Link>
+            </NoteInner>
+          ))}
       </NotesList>
     </FieldNotesListWrapper>
   );
