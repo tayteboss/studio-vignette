@@ -63,7 +63,11 @@ const SmallTitle = styled.p`
 `;
 
 const Categories = styled.div`
-  height: 15px;
+  line-height: 0.7;
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    line-height: 1.2;
+  }
 `;
 
 const Category = styled.span`
@@ -104,6 +108,12 @@ const Right = styled.div`
 
 const Date = styled.span`
   transition: all var(--transition-speed-default) var(--transition-ease);
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    &.type-small {
+      line-height: 1.7;
+    }
+  }
 `;
 
 const MediaWrapper = styled.div`

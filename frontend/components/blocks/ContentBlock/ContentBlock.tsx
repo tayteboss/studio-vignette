@@ -63,7 +63,11 @@ const MediaContentHeader = styled.div`
   gap: ${pxToRem(10)};
 `;
 
-const MediaCaption = styled.p``;
+const MediaCaption = styled.p`
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    max-width: 80%;
+  }
+`;
 
 const Caption = styled.div`
   display: flex;

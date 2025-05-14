@@ -22,8 +22,8 @@ const PageBuilder = (props: Props) => {
     imageGalleryBlockPB: ImageGalleryBlock,
     mediaBlockPB: MediaBlock,
     productGalleryBlockPB: ProductGalleryBlock,
-    considerationsBlockPB: ConsiderationsBlock,
     testimonialBlockPB: TestimonialBlock,
+    considerationsBlockPB: ConsiderationsBlock,
   };
 
   return (
