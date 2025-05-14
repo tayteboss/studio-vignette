@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import pxToRem from "../../../utils/pxToRem";
 import MediaStack from "../../common/MediaStack";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const GalleryMainWrapper = styled.div`
   grid-column: 5 / -1;
@@ -41,6 +42,17 @@ const ContentHeader = styled.div`
   display: flex;
   align-items: center;
   gap: ${pxToRem(10)};
+
+  a {
+    color: var(--colour-cream);
+    text-decoration: underline;
+
+    transition: all var(--transition-speed-default) var(--transition-ease);
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 
   span {
     color: var(--colour-cream);
@@ -102,7 +114,13 @@ const GalleryMain = (props: Props) => {
               {activeItem?.figureNumber && (
                 <span>{activeItem?.figureNumber}.</span>
               )}
-              {activeItem?.title && <span>{activeItem?.title}</span>}
+              {activeItem?.url ? (
+                <Link href={activeItem?.url} target="_blank">
+                  {activeItem?.title}
+                </Link>
+              ) : (
+                activeItem?.title && <span>{activeItem?.title}</span>
+              )}
             </ContentHeader>
           )}
           {activeItem?.caption && (

@@ -1,6 +1,12 @@
 @font-face {
 	font-family: 'Hal Timezone';
-	src: url('/fonts/HalTimezone-Regular.woff2') format('woff2'), url('/fonts/HalTimezone-Regular.woff') format('woff'), url('/fonts/HalTimezone-Regular.otf') format('opentype');
+	src: url('/fonts/HALTimezone-Regular.woff2') format('woff2'), url('/fonts/HALTimezone-Regular.woff') format('woff'), url('/fonts/HALTimezone-Regular.otf') format('opentype');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Hal Timezone Mono';
+	src: url('/fonts/HALTimezone-MonoRegular.otf') format('opentype');
 	font-display: swap;
 }
 

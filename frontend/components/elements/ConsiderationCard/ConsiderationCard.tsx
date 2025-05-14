@@ -5,6 +5,7 @@ import {
 } from "../../../shared/types/types";
 import Image from "next/image";
 import pxToRem from "../../../utils/pxToRem";
+import { useInView } from "react-intersection-observer";
 
 const ConsiderationCardWrapper = styled.div`
   width: 100%;
@@ -55,10 +56,17 @@ type Props = {
 const ConsiderationCard = (props: Props) => {
   const { title, description, image, imageRatio, index } = props;
 
+  const { ref, inView } = useInView({
+    triggerOnce: false,
+    threshold: 0.9,
+  });
+
   return (
-    <ConsiderationCardWrapper className="considerations-card hover-trigger-colour">
+    <ConsiderationCardWrapper
+      className={`considerations-card hover-trigger-colour ${inView ? "trigger-colour" : ""}`}
+    >
       <ImageWrapper $ratio={imageRatio}>
-        <ImageInner className="image-colour-base">
+        <ImageInner className="image-colour-base" ref={ref}>
           {image?.asset.url && (
             <Image
               src={image?.asset.url}

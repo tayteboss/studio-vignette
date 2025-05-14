@@ -112,6 +112,7 @@ export type ContentBlock = {
     heroMediaFigureNumber?: string;
     heroMediaTitle?: string;
     heroMediaCaption?: string;
+    heroMediaLink?: string;
   };
 };
 

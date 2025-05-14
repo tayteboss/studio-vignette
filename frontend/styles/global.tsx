@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
 		--colour-primary: ${theme.colours.primary};
 		--colour-cream: ${theme.colours.cream};
 		--font-hal: ${theme.fonts.hal};
+		--font-hal-mono: ${theme.fonts.halMono};
 		--font-marfa: ${theme.fonts.marfa};
 		--transition-speed-default: ${theme.transitionSpeed.default};
 		--transition-speed-fast: ${theme.transitionSpeed.fast};
@@ -224,7 +225,7 @@ export const GlobalStyles = createGlobalStyle`
 
 	h6,
 	.type-h6 {
-		font-family: var(--font-hal);
+		font-family: var(--font-hal-mono);
 		font-weight: 400;
 		font-size: ${pxToRem(12)};
 		line-height: normal;
@@ -237,7 +238,7 @@ export const GlobalStyles = createGlobalStyle`
 		
 
 		* {
-			font-family: var(--font-hal);
+			font-family: var(--font-hal-mono);
 			font-weight: 400;
 			font-size: ${pxToRem(12)};
 			line-height: normal;
@@ -303,8 +304,11 @@ export const GlobalStyles = createGlobalStyle`
 
 	.image-colour-base {
 		img, mux-player {
+			position: relative;
+			z-index: 2;
 			filter: grayscale(100%);
 			mix-blend-mode: screen;
+			transform: translate3d(0,0,0);
 
 			transition: all var(--transition-speed-slow) var(--transition-ease);
 
@@ -321,7 +325,7 @@ export const GlobalStyles = createGlobalStyle`
 			width: 100%;
 			height: 100%;
 			background-color: var(--colour-primary);
-			z-index: -1;
+			z-index: 1;
 		}
 	}
 

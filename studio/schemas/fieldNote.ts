@@ -1,5 +1,4 @@
 import {CaseIcon} from '@sanity/icons'
-import {orderRankField, orderRankOrdering} from '@sanity/orderable-document-list'
 import {
   considerationsBlockPB,
   contentBlockPB,
@@ -17,9 +16,7 @@ export default {
   name: 'fieldNote',
   type: 'document',
   icon: CaseIcon,
-  orderings: [orderRankOrdering],
   fields: [
-    orderRankField({type: 'fieldNote'}),
     {
       title: 'Title',
       name: 'title',

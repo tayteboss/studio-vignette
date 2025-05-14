@@ -7,6 +7,7 @@ export const theme = {
   },
   fonts: {
     hal: "Hal Timezone",
+    halMono: "Hal Timezone Mono",
     marfa: "ABC Marfa",
   },
   mediaBreakpoints: {

@@ -42,7 +42,8 @@ export const pageBuilderBlockString = `
 		heroMediaRatio,
 		heroMediaFigureNumber,
 		heroMediaTitle,
-		heroMediaCaption
+		heroMediaCaption,
+		heroMediaLink
 	},
 	imageGalleryBlockPB {
 		galleryItems[] {

@@ -190,6 +190,12 @@ const contentBlockPB = {
       type: 'text',
       rows: 3,
     },
+    {
+      title: 'Hero Media Link',
+      name: 'heroMediaLink',
+      type: 'url',
+      description: 'Optional link URL',
+    },
   ],
   hidden: ({parent}: any) => parent?.component !== 'contentBlockPB',
 }

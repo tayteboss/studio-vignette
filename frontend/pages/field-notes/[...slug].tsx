@@ -9,8 +9,24 @@ import PageBuilder from "../../components/common/PageBuilder";
 import FieldNoteHeader from "../../components/blocks/FieldNoteHeader";
 import MoreNotes from "../../components/blocks/MoreNotes";
 import { useViewedFieldNotes } from "../../hooks/useViewedFieldNotes";
+import pxToRem from "../../utils/pxToRem";
+import { useRouter } from "next/router";
 
 const PageWrapper = styled(motion.div)``;
+
+const CloseButton = styled.button`
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  padding: ${pxToRem(20)};
+
+  transition: all var(--transition-speed-default) var(--transition-ease);
+
+  &:hover {
+    opacity: 0.5;
+  }
+`;
 
 type Props = {
   data: FieldNoteType;
@@ -20,7 +36,10 @@ type Props = {
 
 const Page = (props: Props) => {
   const { data, fieldNotesWithNumerals, pageTransitionVariants } = props;
+
   const viewedFieldNotes = useViewedFieldNotes(data?.slug?.current);
+
+  const router = useRouter();
 
   return (
     <PageWrapper
@@ -48,6 +67,12 @@ const Page = (props: Props) => {
         data={fieldNotesWithNumerals}
         viewedFieldNotes={viewedFieldNotes}
       />
+      {/* <CloseButton
+        className="type-h4 uppercase underline"
+        onClick={() => router.back()}
+      >
+        Close
+      </CloseButton> */}
     </PageWrapper>
   );
 };

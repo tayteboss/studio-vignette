@@ -14,6 +14,7 @@ type Props = {
   alt?: string;
   lazyLoad?: boolean;
   useLoader?: boolean;
+  noMobileColourSwitch?: boolean;
 };
 
 const MediaStack = (props: Props) => {
@@ -24,6 +25,7 @@ const MediaStack = (props: Props) => {
     sizes = undefined,
     alt,
     lazyLoad = false,
+    noMobileColourSwitch = false,
   } = props ?? {};
 
   // sizes="(max-width: 768px) 38vw, (max-width: 1024px) 20vw, 15vw"
@@ -56,6 +58,7 @@ const MediaStack = (props: Props) => {
           sizes={sizes}
           alt={alt}
           lazyLoad={lazyLoad}
+          noMobileColourSwitch={noMobileColourSwitch}
         />
       )}
     </MediaStackWrapper>

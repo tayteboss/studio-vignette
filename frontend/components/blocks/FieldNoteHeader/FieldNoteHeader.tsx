@@ -12,7 +12,6 @@ const FieldNoteHeaderWrapper = styled.section`
   flex-direction: column;
   justify-content: space-between;
   gap: ${pxToRem(100)};
-  height: 100vh;
   margin-bottom: ${pxToRem(100)};
 
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
@@ -31,6 +30,8 @@ const Inner = styled.div`
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
     padding: ${pxToRem(80)} 0 ${pxToRem(50)};
     gap: ${pxToRem(50)};
+    height: unset;
+    min-height: 100vh;
   }
 `;
 
@@ -104,34 +105,31 @@ const Date = styled.span`
   transition: all var(--transition-speed-default) var(--transition-ease);
 `;
 
-const MediaWrapper = styled.div`
+const convertRatioToAspectRatio = (ratio: string): string => {
+  if (!ratio) return "1/1";
+  if (ratio === "100%") return "1/1";
+  const decimal = parseInt(ratio) / 100;
+  return `1/${decimal}`;
+};
+
+const MediaWrapper = styled.div<{ $ratio: string }>`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-    flex: unset;
-    width: 80%;
+    flex: 1;
     margin: 0 auto;
     align-items: flex-end;
-    max-height: 70%;
-    overflow: hidden;
+    width: 75%;
   }
 `;
-
-const convertRatioToAspectRatio = (ratio: string): string => {
-  if (!ratio) return "1/1";
-  const decimal = parseInt(ratio) / 100;
-  return `1/${decimal}`;
-};
 
 const MediaInner = styled.div<{ $ratio: string }>`
   height: 100%;
   position: relative;
   aspect-ratio: ${(props) => convertRatioToAspectRatio(props.$ratio)};
-  width: auto;
-  max-width: 100%;
 
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
     height: auto;
@@ -189,6 +187,8 @@ const FieldNoteHeader = (props: Props) => {
     setFormattedDate(formatDate(date));
   }, [date]);
 
+  console.log("heroMediaRatio", heroMediaRatio);
+
   return (
     <FieldNoteHeaderWrapper>
       <LayoutWrapper>
@@ -228,8 +228,8 @@ const FieldNoteHeader = (props: Props) => {
               </Right>
             </LayoutGrid>
           </ContentWrapper>
-          <MediaWrapper>
-            <MediaInner $ratio={heroMediaRatio || "0"}>
+          <MediaWrapper $ratio={heroMediaRatio || "100%"}>
+            <MediaInner $ratio={heroMediaRatio || "100%"}>
               {heroMedia && <MediaStack data={heroMedia} isPriority={true} />}
               {heroMediaCaption && (
                 <MediaCaption className="type-h6">

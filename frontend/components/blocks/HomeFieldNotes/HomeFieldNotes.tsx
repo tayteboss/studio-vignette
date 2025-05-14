@@ -11,7 +11,7 @@ const HomeFieldNotesWrapper = styled.section`
   position: relative;
 
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-    padding-top: 80vh;
+    padding-top: 40vh;
   }
 
   .layout-grid {
@@ -83,6 +83,7 @@ const HomeFieldNotes = (props: Props) => {
   } = props;
   const [fieldNotes, setFieldNotes] =
     useState<FieldNoteType[]>(initialFieldNotes);
+
   const wrapperRef = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
 

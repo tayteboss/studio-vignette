@@ -42,7 +42,11 @@ const ImageWrapper = styled.div`
 `;
 
 const MediaWrapper = styled.div`
-  padding-bottom: ${pxToRem(20)};
+  margin-bottom: ${pxToRem(20)};
+
+  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
+    margin-bottom: ${pxToRem(10)};
+  }
 
   .media-wrapper {
     padding-top: 150%;

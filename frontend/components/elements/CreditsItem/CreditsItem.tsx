@@ -36,6 +36,7 @@ const Dots = styled.span`
   z-index: 1;
   white-space: nowrap;
   overflow: hidden;
+  font-family: var(--font-hal);
 `;
 
 const Title = styled.span`

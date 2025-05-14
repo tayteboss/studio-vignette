@@ -10,7 +10,8 @@ const FieldNoteCardWrapper = styled.div`
   margin-bottom: 20vh;
 
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-    margin-bottom: 30vh;
+    margin-bottom: 0;
+    padding: 35vw 0;
   }
 `;
 
@@ -61,7 +62,7 @@ const FieldNoteCard = (props: Props) => {
     >
       <Link href={`/field-notes/${fieldNote?.slug.current}`}>
         <MediaWrapper $ratio={fieldNote?.heroMediaRatio}>
-          <MediaStack data={fieldNote?.heroMedia} />
+          <MediaStack data={fieldNote?.heroMedia} noMobileColourSwitch={true} />
         </MediaWrapper>
       </Link>
     </FieldNoteCardWrapper>

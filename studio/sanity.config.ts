@@ -5,7 +5,6 @@ import {schemaTypes} from './schemas'
 import {muxInput} from 'sanity-plugin-mux-input'
 import {vercelDeployTool} from 'sanity-plugin-vercel-deploy'
 import {EarthGlobeIcon, DocumentIcon, CaseIcon} from '@sanity/icons'
-import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
 export default defineConfig({
   name: 'default',
@@ -48,13 +47,6 @@ export default defineConfig({
                   .schemaType('fieldNote')
                   .filter('_type == "fieldNote"'),
               ),
-            S.divider(),
-            orderableDocumentListDeskItem({
-              title: 'Order: Field Notes',
-              type: 'fieldNote',
-              S,
-              context,
-            }) as any,
           ])
       },
     }),

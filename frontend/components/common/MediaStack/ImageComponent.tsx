@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { MediaType } from "../../../shared/types/types"; // Adjust path as needed
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import useViewportWidth from "../../../hooks/useViewportWidth";
 
 const ImageComponentWrapper = styled.div`
   position: relative;
@@ -72,6 +74,7 @@ type Props = {
   sizes: string | undefined;
   alt?: string;
   lazyLoad?: boolean;
+  noMobileColourSwitch?: boolean;
 };
 
 const ImageComponent = (props: Props) => {
@@ -83,6 +86,7 @@ const ImageComponent = (props: Props) => {
     sizes,
     alt,
     lazyLoad,
+    noMobileColourSwitch,
   } = props;
 
   // Set responsive image sizes
@@ -151,8 +155,19 @@ const ImageComponent = (props: Props) => {
 
   const shouldAnimateElements = inView || isPriority;
 
+  const { ref, inView: isInView } = useInView({
+    triggerOnce: false,
+    threshold: 0.9,
+  });
+
+  const viewport = useViewportWidth();
+  const isMobile = viewport === "mobile" || viewport === "tabletPortrait";
+
   return (
-    <ImageComponentWrapper className="media-wrapper">
+    <ImageComponentWrapper
+      className={`media-wrapper ${isInView && isMobile && !noMobileColourSwitch ? "trigger-colour" : ""}`}
+      ref={ref}
+    >
       <AnimatePresence>
         {shouldAnimateElements && blurDataURL && !isMainImageLoaded && (
           <InnerBlurWrapper

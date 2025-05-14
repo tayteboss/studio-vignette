@@ -8,6 +8,7 @@ import LayoutGrid from "../../layout/LayoutGrid";
 import pxToRem from "../../../utils/pxToRem";
 import formatHTML from "../../../utils/formatHTML";
 import MediaStack from "../../common/MediaStack";
+import Link from "next/link";
 
 const ContentBlockWrapper = styled.section`
   margin-bottom: ${pxToRem(100)};
@@ -61,6 +62,16 @@ const MediaContentHeader = styled.div`
   display: flex;
   align-items: center;
   gap: ${pxToRem(10)};
+
+  a {
+    text-decoration: underline;
+
+    transition: all var(--transition-speed-default) var(--transition-ease);
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `;
 
 const MediaCaption = styled.p`
@@ -124,6 +135,7 @@ const ContentBlock = (props: Props) => {
     heroMediaFigureNumber,
     heroMediaCaption,
     heroMediaTitle,
+    heroMediaLink,
   } = contentBlockPB;
 
   const hasContent = contentBlock && contentBlock.length > 0;
@@ -184,7 +196,13 @@ const ContentBlock = (props: Props) => {
                   {heroMediaFigureNumber && (
                     <span>{heroMediaFigureNumber}.</span>
                   )}
-                  {heroMediaTitle && <span>{heroMediaTitle}</span>}
+                  {heroMediaLink ? (
+                    <Link href={heroMediaLink} target="_blank">
+                      {heroMediaTitle}
+                    </Link>
+                  ) : (
+                    heroMediaTitle && <span>{heroMediaTitle}</span>
+                  )}
                 </MediaContentHeader>
               )}
               {heroMediaCaption && (

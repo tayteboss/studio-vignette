@@ -35,7 +35,7 @@ const Slide = styled.div`
 
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
     flex: 0 0 calc((100% / 8) * 4);
-    margin-right: ${pxToRem(5)};
+    margin-right: ${pxToRem(15)};
   }
 
   @media ${(props) => props.theme.mediaBreakpoints.mobile} {
