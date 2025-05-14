@@ -5,20 +5,40 @@ import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { mediaString, pageBuilderBlockString } from "../../lib/sanityQueries";
 import { addNumeralsToFieldNotes } from "../../utils/fieldNotes";
+import { addViewedFieldNote, getViewedFieldNotes } from "../../utils/cookies";
 import PageBuilder from "../../components/common/PageBuilder";
 import FieldNoteHeader from "../../components/blocks/FieldNoteHeader";
-
-type Props = {
-  data: FieldNoteType;
-  pageTransitionVariants: TransitionsType;
-};
+import MoreNotes from "../../components/blocks/MoreNotes";
+import { useEffect, useState } from "react";
 
 const PageWrapper = styled(motion.div)``;
 
-const Page = (props: Props) => {
-  const { data, pageTransitionVariants } = props;
+type Props = {
+  data: FieldNoteType;
+  fieldNotesWithNumerals: FieldNoteType[];
+  pageTransitionVariants: TransitionsType;
+};
 
-  console.log("data", data);
+const Page = (props: Props) => {
+  const { data, fieldNotesWithNumerals, pageTransitionVariants } = props;
+  const [viewedFieldNotes, setViewedFieldNotes] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Get initial viewed notes
+    const initialViewedNotes = getViewedFieldNotes();
+    setViewedFieldNotes(initialViewedNotes);
+
+    // Add current note to viewed notes if it exists
+    if (data?.slug?.current) {
+      addViewedFieldNote(data.slug.current);
+      setViewedFieldNotes((prev) => {
+        if (!prev.includes(data.slug.current)) {
+          return [...prev, data.slug.current];
+        }
+        return prev;
+      });
+    }
+  }, [data?.slug?.current]);
 
   return (
     <PageWrapper
@@ -42,6 +62,10 @@ const Page = (props: Props) => {
         numeralIndex={data.numeralIndex}
       />
       <PageBuilder data={data.pageBuilder} />
+      <MoreNotes
+        data={fieldNotesWithNumerals}
+        viewedFieldNotes={viewedFieldNotes}
+      />
     </PageWrapper>
   );
 };
@@ -88,6 +112,11 @@ export async function getStaticProps({ params }: any) {
     *[_type == 'fieldNote'] | order(date desc) [0...100] {
       title,
       slug,
+      categories[]-> {
+        name
+      },
+      date,
+      season
     }
   `;
 
@@ -108,6 +137,7 @@ export async function getStaticProps({ params }: any) {
         ...data,
         numeralIndex: currentFieldNote?.numeralIndex || "",
       },
+      fieldNotesWithNumerals,
     },
   };
 }

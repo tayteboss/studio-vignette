@@ -115,6 +115,8 @@ const MediaWrapper = styled.div`
     width: 80%;
     margin: 0 auto;
     align-items: flex-end;
+    max-height: 70%;
+    overflow: hidden;
   }
 `;
 
