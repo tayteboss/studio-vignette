@@ -80,7 +80,7 @@ export const pageBuilderBlockString = `
 		}
 	},
 	considerationsBlockPB {
-		title,
+		subheading,
 		considerations[] {
 			title,
 			description,

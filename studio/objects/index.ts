@@ -355,6 +355,7 @@ const considerationsBlockPB = {
       title: 'Considerations',
       name: 'considerations',
       type: 'array',
+      validation: (Rule: any) => Rule.max(10),
       of: [
         {
           type: 'object',

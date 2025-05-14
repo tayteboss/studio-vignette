@@ -161,7 +161,7 @@ export type ProductGalleryBlock = {
 export type ConsiderationsBlock = {
   component: "considerationsBlockPB";
   considerationsBlockPB: {
-    title: string;
+    subheading: string;
     considerations: Array<{
       title: string;
       description: string;
