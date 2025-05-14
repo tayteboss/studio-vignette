@@ -62,13 +62,7 @@ const SmallTitle = styled.p`
   transition: all var(--transition-speed-default) var(--transition-ease);
 `;
 
-const Categories = styled.div`
-  line-height: 0.7;
-
-  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-    line-height: 1.2;
-  }
-`;
+const Categories = styled.div``;
 
 const Category = styled.span`
   transition: all var(--transition-speed-default) var(--transition-ease);
@@ -108,12 +102,6 @@ const Right = styled.div`
 
 const Date = styled.span`
   transition: all var(--transition-speed-default) var(--transition-ease);
-
-  @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-    &.type-small {
-      line-height: 1.7;
-    }
-  }
 `;
 
 const MediaWrapper = styled.div`
@@ -208,10 +196,12 @@ const FieldNoteHeader = (props: Props) => {
               <Left className="field-note-card__top">
                 {hasCategories && (
                   <>
-                    <SmallTitle className="type-small">Categories</SmallTitle>
+                    <SmallTitle className="type-h5 uppercase">
+                      Categories
+                    </SmallTitle>
                     <Categories>
                       {categories?.map((category) => (
-                        <Category className="type-small" key={category?.name}>
+                        <Category className="type-h5" key={category?.name}>
                           {category?.name}
                           {categories?.indexOf(category) !==
                             categories.length - 1 && ", "}
@@ -229,9 +219,9 @@ const FieldNoteHeader = (props: Props) => {
                 </Title>
               </Middle>
               <Right className="field-note-card__bottom">
-                <SmallTitle className="type-small">Date</SmallTitle>
+                <SmallTitle className="type-h5 uppercase">Date</SmallTitle>
                 <Categories>
-                  <Date className="type-small">{formattedDate}</Date>
+                  <Date className="type-h5">{formattedDate}</Date>
                 </Categories>
               </Right>
             </LayoutGrid>

@@ -98,7 +98,7 @@ const GalleryMain = (props: Props) => {
           transition={{ duration: 0.3 }}
         >
           {activeItem?.caption && (
-            <ContentHeader className="type-h6">
+            <ContentHeader className="type-h4">
               {activeItem?.figureNumber && (
                 <span>{activeItem?.figureNumber}.</span>
               )}
@@ -106,7 +106,7 @@ const GalleryMain = (props: Props) => {
             </ContentHeader>
           )}
           {activeItem?.caption && (
-            <MediaCaption className="type-h6">
+            <MediaCaption className="type-h4">
               {activeItem?.caption}
             </MediaCaption>
           )}

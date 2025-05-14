@@ -36,23 +36,17 @@ const Header = () => {
   return (
     <HeaderWrapper className="header">
       <Link href="/">
-        <LinkTag className="type-small" $isActive={activeLink === "home"}>
+        <LinkTag className="type-h4" $isActive={activeLink === "home"}>
           Studio Vignette
         </LinkTag>
       </Link>
       <Link href="/field-notes">
-        <LinkTag
-          className="type-small"
-          $isActive={activeLink === "field-notes"}
-        >
+        <LinkTag className="type-h4" $isActive={activeLink === "field-notes"}>
           Field Notes
         </LinkTag>
       </Link>
       <Link href="/information">
-        <LinkTag
-          className="type-small"
-          $isActive={activeLink === "information"}
-        >
+        <LinkTag className="type-h4" $isActive={activeLink === "information"}>
           Information
         </LinkTag>
       </Link>

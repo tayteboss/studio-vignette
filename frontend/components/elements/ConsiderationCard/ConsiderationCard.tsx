@@ -74,7 +74,7 @@ const ConsiderationCard = (props: Props) => {
       </ImageWrapper>
       <ContentWrapper>
         <Num>{["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"][index]}</Num>
-        <Description className="type-h6">{description}</Description>
+        <Description className="type-p">{description}</Description>
       </ContentWrapper>
     </ConsiderationCardWrapper>
   );

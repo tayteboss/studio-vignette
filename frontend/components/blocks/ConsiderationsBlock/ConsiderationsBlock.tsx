@@ -97,7 +97,7 @@ const ConsiderationsBlock = (props: Props) => {
   return (
     <ConsiderationsBlockWrapper>
       <LayoutWrapper>
-        <Title className="type-small">{subheading || ""}</Title>
+        <Title className="type-h5">{subheading || ""}</Title>
         {hasData && (
           <CardsWrapper>
             <LayoutGrid>

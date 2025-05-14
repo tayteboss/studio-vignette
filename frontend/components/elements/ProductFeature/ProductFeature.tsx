@@ -35,8 +35,8 @@ const ProductFeature = (props: Props) => {
 
   return (
     <ProductFeatureWrapper>
-      <Title className="type-small">{title || ""}</Title>
-      <Value className="type-small">{value || ""}</Value>
+      <Title className="type-h4">{title || ""}</Title>
+      <Value className="type-h4">{value || ""}</Value>
     </ProductFeatureWrapper>
   );
 };

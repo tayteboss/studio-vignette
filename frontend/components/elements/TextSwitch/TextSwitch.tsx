@@ -29,8 +29,8 @@ const TextSwitch = (props: Props) => {
 
   return (
     <TextSwitchWrapper>
-      <Resting className="resting">{resting}</Resting>
-      <Hover className="hover">{hover}</Hover>
+      <Resting className="type-h4 resting">{resting}</Resting>
+      <Hover className="type-h4 hover">{hover}</Hover>
     </TextSwitchWrapper>
   );
 };

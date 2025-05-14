@@ -37,8 +37,8 @@ const ContentCard = (props: Props) => {
 
   return (
     <ContentCardWrapper>
-      <Title className="type-small">{title}</Title>
-      <ContentWrapper className="type-p">
+      <Title className="type-h5">{title}</Title>
+      <ContentWrapper className="type-h3">
         <Content dangerouslySetInnerHTML={{ __html: formatHTML(data) }} />
       </ContentWrapper>
     </ContentCardWrapper>

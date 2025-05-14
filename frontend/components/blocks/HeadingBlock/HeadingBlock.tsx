@@ -48,7 +48,7 @@ const HeadingBlock = (props: Props) => {
     <HeadingBlockWrapper>
       <LayoutWrapper>
         <Inner>
-          <Subheading className="type-small">{subheading || ""}</Subheading>
+          <Subheading className="type-h5">{subheading || ""}</Subheading>
           <Heading className="type-h2">{heading || ""}</Heading>
         </Inner>
       </LayoutWrapper>

@@ -112,6 +112,19 @@ export const GlobalStyles = createGlobalStyle`
 			font-size: ${pxToRem(28)};
 			line-height: ${pxToRem(26)};
 		}
+
+		* {
+			font-family: var(--font-hal);
+			font-weight: 400;
+			font-size: ${pxToRem(48)};
+			line-height: ${pxToRem(45)};
+			letter-spacing: -1.44px;
+
+			@media ${theme.mediaBreakpoints.tabletPortrait} {
+				font-size: ${pxToRem(28)};
+				line-height: ${pxToRem(26)};
+			}
+		}
 	}
 
 	h2,
@@ -126,6 +139,19 @@ export const GlobalStyles = createGlobalStyle`
 			font-size: ${pxToRem(20)};
 			line-height: ${pxToRem(22)};
 		}
+
+		* {
+			font-family: var(--font-hal);
+			font-weight: 400;
+			font-size: ${pxToRem(40)};
+			line-height: ${pxToRem(44)};
+			letter-spacing: -0.4px;
+
+			@media ${theme.mediaBreakpoints.tabletPortrait} {
+				font-size: ${pxToRem(20)};
+				line-height: ${pxToRem(22)};
+			}
+		}
 	}
 
 	h3,
@@ -139,6 +165,7 @@ export const GlobalStyles = createGlobalStyle`
 		@media ${theme.mediaBreakpoints.tabletPortrait} {
 			font-size: ${pxToRem(14)};
 			line-height: ${pxToRem(16)};
+			letter-spacing: -0.28px;
 		}
 
 		* {
@@ -151,62 +178,17 @@ export const GlobalStyles = createGlobalStyle`
 			@media ${theme.mediaBreakpoints.tabletPortrait} {
 				font-size: ${pxToRem(14)};
 				line-height: ${pxToRem(16)};
+				letter-spacing: -0.28px;
 			}
 		}
 	}
 
 	h4,
-	.type-h4,
-	p,
-	.type-p,
-	a,
-	button,
-	div {
-		font-family: var(--font-hal);
-		font-weight: 400;
-		font-size: ${pxToRem(20)};
-		line-height: ${pxToRem(23)};
-		letter-spacing: -0.4px;
-
-		@media ${theme.mediaBreakpoints.tabletPortrait} {
-			font-size: ${pxToRem(16)};
-			line-height: ${pxToRem(18)};
-		}
-
-		* {
-			font-family: var(--font-hal);
-			font-weight: 400;
-			font-size: ${pxToRem(20)};
-			line-height: ${pxToRem(23)};
-			letter-spacing: -0.4px;
-
-			@media ${theme.mediaBreakpoints.tabletPortrait} {
-				font-size: ${pxToRem(16)};
-				line-height: ${pxToRem(18)};
-			}
-		}
-	}
-
-	.type-subtitle {
-		font-family: var(--font-marfa);
-		font-weight: 400;
-		font-size: ${pxToRem(10)};
-		line-height: normal;
-		letter-spacing: -0.3px;
-	}
-
-	.type-caption {
-		font-family: var(--font-hal);
-		font-weight: 400;
-		font-size: ${pxToRem(8)};
-		line-height: ${pxToRem(9)};
-	}
-
-	.type-small {
+	.type-h4 {
 		font-family: var(--font-marfa);
 		font-weight: 400;
 		font-size: ${pxToRem(12)};
-		line-height: 1.2;
+		line-height: normal;
 
 		* {
 			font-family: var(--font-marfa);
@@ -216,6 +198,31 @@ export const GlobalStyles = createGlobalStyle`
 		}
 	}
 
+	h5,
+	.type-h5 {
+		font-family: var(--font-marfa);
+		font-weight: 400;
+		font-size: ${pxToRem(12)};
+		line-height: normal;
+
+		@media ${theme.mediaBreakpoints.tabletPortrait} {
+			font-size: ${pxToRem(10)};
+		}
+		
+
+		* {
+			font-family: var(--font-marfa);
+			font-weight: 400;
+			font-size: ${pxToRem(12)};
+			line-height: normal;
+
+			@media ${theme.mediaBreakpoints.tabletPortrait} {
+				font-size: ${pxToRem(10)};
+			}
+		}
+	}
+
+	h6,
 	.type-h6 {
 		font-family: var(--font-hal);
 		font-weight: 400;
@@ -227,6 +234,7 @@ export const GlobalStyles = createGlobalStyle`
 			font-size: ${pxToRem(9)};
 			letter-spacing: 0.09px;
 		}
+		
 
 		* {
 			font-family: var(--font-hal);
@@ -239,6 +247,23 @@ export const GlobalStyles = createGlobalStyle`
 				font-size: ${pxToRem(9)};
 				letter-spacing: 0.09px;
 			}
+		}
+	}
+	
+
+	p,
+	.type-p,
+	a {
+		font-family: var(--font-hal);
+		font-weight: 400;
+		font-size: ${pxToRem(12)};
+		line-height: ${pxToRem(13)};
+
+		* {
+			font-family: var(--font-hal);
+			font-weight: 400;
+			font-size: ${pxToRem(12)};
+			line-height: ${pxToRem(13)};
 		}
 	}
 
@@ -256,6 +281,16 @@ export const GlobalStyles = createGlobalStyle`
 		--controls: none;
 		--media-object-fit: cover;
 		--media-object-position: center;
+	}
+
+	.hover-trigger-colour {
+		&:hover {
+			.image-colour-base {
+				img, mux-player {
+					filter: grayscale(0%);
+				}
+			}
+		}
 	}
 
 	.trigger-colour {

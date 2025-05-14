@@ -76,8 +76,8 @@ const OfficeCard = (props: Props) => {
 
   return (
     <OfficeCardWrapper>
-      <Title className="type-small">03. Office</Title>
-      <ContentWrapper className="type-p">
+      <Title className="type-h5">03. Office</Title>
+      <ContentWrapper className="type-h3">
         {addressUrl && (
           <Link href={addressUrl} target="_blank">
             <AddressWrapper>
@@ -104,7 +104,7 @@ const OfficeCard = (props: Props) => {
             {socialLinks.map(
               (socialLink, i) =>
                 socialLink?.socialLink && (
-                  <Link href={socialLink.socialLink} target="_blank">
+                  <Link href={socialLink.socialLink} target="_blank" key={i}>
                     <SocialTitle>
                       {socialLink?.socialTitle || ""}
                       {i !== socialLinks.length - 1 ? ", " : ""}

@@ -65,16 +65,18 @@ const ProductGalleryBlock = (props: Props) => {
 
   useEffect(() => {
     if (emblaApi) {
-      emblaApi.on("select", () => {
+      const onSelect = () => {
         setActiveIndex(emblaApi.selectedScrollSnap());
-      });
-    }
+      };
 
-    return () => {
-      if (emblaApi) {
-        emblaApi.off("select");
-      }
-    };
+      emblaApi.on("select", onSelect);
+
+      return () => {
+        if (emblaApi) {
+          emblaApi.off("select", onSelect);
+        }
+      };
+    }
   }, [emblaApi]);
 
   useEffect(() => {

@@ -99,11 +99,11 @@ const ProductCard = (props: Props) => {
         {link ? (
           <Link href={link} target="_blank" rel="noopener noreferrer">
             {title && (
-              <Title className="type-small uppercase underline">{title}</Title>
+              <Title className="type-h4 uppercase underline">{title}</Title>
             )}
           </Link>
         ) : (
-          title && <Title className="type-small uppercase">{title}</Title>
+          title && <Title className="type-h4 uppercase">{title}</Title>
         )}
         {hasFeatures && (
           <Features>
@@ -117,7 +117,7 @@ const ProductCard = (props: Props) => {
           </Features>
         )}
         {description && (
-          <Description className="type-small">{description}</Description>
+          <Description className="type-h4">{description}</Description>
         )}
       </ContentWrapper>
     </ProductCardWrapper>

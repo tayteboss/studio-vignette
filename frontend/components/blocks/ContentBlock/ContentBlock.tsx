@@ -132,14 +132,14 @@ const ContentBlock = (props: Props) => {
     <ContentBlockWrapper>
       <LayoutWrapper>
         <LayoutGrid>
-          <Subheading className="type-small">{subheading || ""}</Subheading>
+          <Subheading className="type-h5">{subheading || ""}</Subheading>
           <ContentWrapper>
             {hasContent &&
               contentBlock.map((section, index) => {
                 const useContentSection = section.content;
 
                 return useContentSection ? (
-                  <ContentSection key={index}>
+                  <ContentSection key={index} className="type-h3">
                     {section?.content && (
                       <Content
                         dangerouslySetInnerHTML={{

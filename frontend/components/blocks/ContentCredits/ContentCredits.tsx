@@ -36,8 +36,8 @@ const ContentCredits = (props: Props) => {
 
   return (
     <ContentCreditsWrapper>
-      <Title className="type-small">04. Credits</Title>
-      <ContentWrapper className="type-p">
+      <Title className="type-h5">04. Credits</Title>
+      <ContentWrapper>
         {hasCredits &&
           credits.map((credit) => (
             <CreditsItem
