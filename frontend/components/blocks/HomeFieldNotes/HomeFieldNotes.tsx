@@ -3,7 +3,7 @@ import { FieldNoteType } from "../../../shared/types/types";
 import LayoutWrapper from "../../layout/LayoutWrapper";
 import LayoutGrid from "../../layout/LayoutGrid";
 import FieldNoteCard from "../FieldNoteCard";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { useLenis } from "@studio-freight/react-lenis";
 
 const HomeFieldNotesWrapper = styled.section`
@@ -83,51 +83,138 @@ const HomeFieldNotes = (props: Props) => {
   } = props;
   const [fieldNotes, setFieldNotes] =
     useState<FieldNoteType[]>(initialFieldNotes);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [scrollSpeed, setScrollSpeed] = useState(2);
+  const [isHovering, setIsHovering] = useState(false);
+  const inactivityTimerRef = useRef<NodeJS.Timeout>();
+  const resizeTimerRef = useRef<NodeJS.Timeout>();
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
+  const autoScrollRef = useRef<number>();
 
+  // Reset inactivity timer
+  const resetInactivityTimer = useCallback(() => {
+    if (inactivityTimerRef.current) {
+      clearTimeout(inactivityTimerRef.current);
+    }
+    inactivityTimerRef.current = setTimeout(() => {
+      setIsAutoScrolling(true);
+    }, 2000);
+  }, []);
+
+  // Memoize the handleScroll callback
+  const handleScroll = useCallback(() => {
+    if (!wrapperRef.current) return;
+
+    const wrapper = wrapperRef.current;
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const wrapperHeight = wrapperRect.height;
+    const scrollTop = window.scrollY;
+    const viewportHeight = window.innerHeight;
+
+    if (scrollTop + viewportHeight > wrapperHeight - viewportHeight) {
+      setFieldNotes((prev) => [...prev, ...initialFieldNotes]);
+    }
+  }, [initialFieldNotes]);
+
+  // Memoize the autoScroll callback
+  const autoScroll = useCallback(() => {
+    if (!lenis) return;
+
+    const currentSpeed = isHovering ? scrollSpeed * 0.3 : scrollSpeed;
+
+    lenis.scrollTo(lenis.scroll + currentSpeed, {
+      duration: 0,
+      immediate: true,
+    });
+
+    autoScrollRef.current = requestAnimationFrame(autoScroll);
+  }, [lenis, scrollSpeed, isHovering]);
+
+  // Set scroll speed based on device type with debounce
   useEffect(() => {
-    if (!lenis || !wrapperRef.current) return;
-
-    const handleScroll = () => {
-      if (!wrapperRef.current) return;
-
-      const wrapper = wrapperRef.current;
-      const wrapperRect = wrapper.getBoundingClientRect();
-      const wrapperHeight = wrapperRect.height;
-      const scrollTop = window.scrollY;
-      const viewportHeight = window.innerHeight;
-
-      if (scrollTop + viewportHeight > wrapperHeight - viewportHeight) {
-        setFieldNotes((prev) => [...prev, ...initialFieldNotes]);
+    const handleResize = () => {
+      if (resizeTimerRef.current) {
+        clearTimeout(resizeTimerRef.current);
       }
+
+      resizeTimerRef.current = setTimeout(() => {
+        const isMobile = window.innerWidth <= 768;
+        setScrollSpeed(isMobile ? 1 : 2);
+      }, 100); // Debounce resize events
     };
 
-    lenis.on("scroll", handleScroll);
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      lenis.off("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+      if (resizeTimerRef.current) {
+        clearTimeout(resizeTimerRef.current);
+      }
     };
-  }, [lenis, initialFieldNotes]);
+  }, []);
 
-  const hasFieldNotes = fieldNotes && fieldNotes.length > 0;
+  // Scroll event listener
+  useEffect(() => {
+    if (!lenis) return;
+
+    lenis.on("scroll", handleScroll);
+    return () => lenis.off("scroll", handleScroll);
+  }, [lenis, handleScroll]);
+
+  // Auto scroll effect
+  useEffect(() => {
+    if (!isAutoScrolling || !lenis) return;
+
+    autoScrollRef.current = requestAnimationFrame(autoScroll);
+
+    return () => {
+      if (autoScrollRef.current) {
+        cancelAnimationFrame(autoScrollRef.current);
+      }
+    };
+  }, [isAutoScrolling, lenis, autoScroll]);
+
+  // Handle user interaction
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      setIsAutoScrolling(false);
+      resetInactivityTimer();
+    };
+
+    window.addEventListener("wheel", handleUserInteraction);
+
+    return () => {
+      window.removeEventListener("wheel", handleUserInteraction);
+      if (inactivityTimerRef.current) {
+        clearTimeout(inactivityTimerRef.current);
+      }
+    };
+  }, []);
+
+  // Memoize the field notes list to prevent unnecessary re-renders
+  const fieldNotesList = useMemo(() => {
+    if (!fieldNotes || fieldNotes.length === 0) return null;
+
+    return fieldNotes.map((fieldNote, index) => (
+      <LayoutGrid key={`${fieldNote.title}-${index}`}>
+        <FieldNoteCard
+          fieldNote={fieldNote}
+          homeTitle={homeTitle}
+          heroTitle={heroTitle}
+          setHeroTitle={setHeroTitle}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        />
+      </LayoutGrid>
+    ));
+  }, [fieldNotes, homeTitle, heroTitle, setHeroTitle]);
 
   return (
     <HomeFieldNotesWrapper ref={wrapperRef}>
-      <LayoutWrapper>
-        {hasFieldNotes &&
-          fieldNotes.map((fieldNote, index) => (
-            <LayoutGrid key={`${fieldNote.title}-${index}`}>
-              <FieldNoteCard
-                fieldNote={fieldNote}
-                homeTitle={homeTitle}
-                heroTitle={heroTitle}
-                setHeroTitle={setHeroTitle}
-              />
-            </LayoutGrid>
-          ))}
-      </LayoutWrapper>
+      <LayoutWrapper>{fieldNotesList}</LayoutWrapper>
     </HomeFieldNotesWrapper>
   );
 };

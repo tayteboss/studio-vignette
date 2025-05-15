@@ -26,10 +26,19 @@ type Props = {
   setHeroTitle: (fieldNote: FieldNoteType | string) => void;
   homeTitle: string;
   heroTitle: string | FieldNoteType;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
 const FieldNoteCard = (props: Props) => {
-  const { fieldNote, setHeroTitle, homeTitle, heroTitle } = props;
+  const {
+    fieldNote,
+    setHeroTitle,
+    homeTitle,
+    heroTitle,
+    onMouseEnter,
+    onMouseLeave,
+  } = props;
 
   const [mobileIsActive, setMobileIsActive] = useState(false);
 
@@ -57,8 +66,14 @@ const FieldNoteCard = (props: Props) => {
     <FieldNoteCardWrapper
       ref={ref}
       className={`${mobileIsActive ? "trigger-colour" : ""} field-note-card`}
-      onMouseOver={() => setHeroTitle(fieldNote)}
-      onMouseOut={() => setHeroTitle(homeTitle)}
+      onMouseOver={() => {
+        setHeroTitle(fieldNote);
+        onMouseEnter?.();
+      }}
+      onMouseOut={() => {
+        setHeroTitle(homeTitle);
+        onMouseLeave?.();
+      }}
     >
       <Link href={`/field-notes/${fieldNote?.slug.current}`}>
         <MediaWrapper $ratio={fieldNote?.heroMediaRatio}>
