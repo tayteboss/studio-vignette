@@ -146,7 +146,7 @@ const HomeFieldNotes = (props: Props) => {
       resizeTimerRef.current = setTimeout(() => {
         const mobile = window.innerWidth <= 768;
         setIsMobile(mobile);
-        setScrollSpeed(mobile ? 2.5 : 2);
+        setScrollSpeed(mobile ? 2 : 2);
       }, 100);
     };
 
