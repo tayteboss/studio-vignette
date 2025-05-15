@@ -11,7 +11,7 @@ const FooterWrapper = styled.footer`
   padding: ${pxToRem(20)};
 
   @media ${(props) => props.theme.mediaBreakpoints.tabletPortrait} {
-    padding: ${pxToRem(10)};
+    padding: ${pxToRem(25)} ${pxToRem(10)};
   }
 `;
 

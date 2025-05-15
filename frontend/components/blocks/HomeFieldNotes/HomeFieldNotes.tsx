@@ -86,6 +86,8 @@ const HomeFieldNotes = (props: Props) => {
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const [scrollSpeed, setScrollSpeed] = useState(2);
   const [isHovering, setIsHovering] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const inactivityTimerRef = useRef<NodeJS.Timeout>();
   const resizeTimerRef = useRef<NodeJS.Timeout>();
 
@@ -98,10 +100,13 @@ const HomeFieldNotes = (props: Props) => {
     if (inactivityTimerRef.current) {
       clearTimeout(inactivityTimerRef.current);
     }
-    inactivityTimerRef.current = setTimeout(() => {
-      setIsAutoScrolling(true);
-    }, 2000);
-  }, []);
+    inactivityTimerRef.current = setTimeout(
+      () => {
+        setIsAutoScrolling(true);
+      },
+      isMobile ? 5000 : 3000
+    );
+  }, [isMobile]);
 
   // Memoize the handleScroll callback
   const handleScroll = useCallback(() => {
@@ -123,7 +128,6 @@ const HomeFieldNotes = (props: Props) => {
     if (!lenis) return;
 
     const currentSpeed = isHovering ? scrollSpeed * 0.3 : scrollSpeed;
-
     lenis.scrollTo(lenis.scroll + currentSpeed, {
       duration: 0,
       immediate: true,
@@ -140,9 +144,10 @@ const HomeFieldNotes = (props: Props) => {
       }
 
       resizeTimerRef.current = setTimeout(() => {
-        const isMobile = window.innerWidth <= 768;
-        setScrollSpeed(isMobile ? 1 : 2);
-      }, 100); // Debounce resize events
+        const mobile = window.innerWidth <= 768;
+        setIsMobile(mobile);
+        setScrollSpeed(mobile ? 2.5 : 2);
+      }, 100);
     };
 
     handleResize();
@@ -185,14 +190,18 @@ const HomeFieldNotes = (props: Props) => {
     };
 
     window.addEventListener("wheel", handleUserInteraction);
+    window.addEventListener("touchstart", handleUserInteraction);
+    window.addEventListener("touchmove", handleUserInteraction);
 
     return () => {
       window.removeEventListener("wheel", handleUserInteraction);
+      window.removeEventListener("touchstart", handleUserInteraction);
+      window.removeEventListener("touchmove", handleUserInteraction);
       if (inactivityTimerRef.current) {
         clearTimeout(inactivityTimerRef.current);
       }
     };
-  }, []);
+  }, [resetInactivityTimer]);
 
   // Memoize the field notes list to prevent unnecessary re-renders
   const fieldNotesList = useMemo(() => {
