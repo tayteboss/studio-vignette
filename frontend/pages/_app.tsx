@@ -11,6 +11,7 @@ import use1vh from "../hooks/use1vh";
 import usePageClass from "../hooks/usePageClass";
 import { TransitionsType } from "../shared/types/types";
 import useHeaderHeight from "../hooks/useHeaderHeight";
+import TagManager from "react-gtm-module";
 
 const pageTransitionVariants: TransitionsType = {
   hidden: { opacity: 0, transition: { duration: 0.3 } },
@@ -34,6 +35,10 @@ const App = (props: Props) => {
     window.scrollTo(0, 0);
   };
 
+  const tagManagerArgs = {
+    gtmId: "GTM-NBPPR7QZ",
+  };
+
   use1vh();
   useHeaderHeight();
   usePageClass();
@@ -44,6 +49,8 @@ const App = (props: Props) => {
     if (hasCookies) {
       setHasVisited(true);
     }
+
+    TagManager.initialize(tagManagerArgs);
 
     const timer = setTimeout(() => {
       Cookies.set("visited", "true", { expires: 1, path: "" });
